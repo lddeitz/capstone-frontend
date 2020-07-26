@@ -2,7 +2,11 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> | 
+      <router-link to="/signup">Signup</router-link> | 
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/logout">Logout</router-link> |
+      <router-link to="/users-show">Users Show</router-link>
     </div>
     <router-view/>
   </div>
@@ -30,3 +34,21 @@
   color: #42b983;
 }
 </style>
+
+<!--script code wasn't here before-->
+<script>
+export default {
+  data: function() {
+    return {};
+  },
+  methods: {
+    // returns true or false depending on jwt in localstorage
+    isLoggedIn: function() {
+      return localStorage.getItem("jwt");
+    }
+    // getUserId: function() {
+    //   return localStorage.getItem("user_id");
+    // },
+  }
+};
+</script>
