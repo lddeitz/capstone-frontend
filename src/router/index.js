@@ -7,6 +7,7 @@ import Logout from "../views/Logout.vue";
 import UsersShow from "../views/UsersShow.vue";
 import UsersEdit from "../views/UsersEdit.vue";
 import SongsNew from "../views/SongsNew.vue";
+import SongsShow from "../views/SongsShow.vue";
 
 Vue.use(VueRouter);
 
@@ -53,6 +54,11 @@ const routes = [
     path: "/songs/new",
     name: "songs-new",
     component: SongsNew
+  },
+  {
+    path: "/songs/:id",
+    name: "songs-show",
+    component: SongsShow
   }
 ];
 

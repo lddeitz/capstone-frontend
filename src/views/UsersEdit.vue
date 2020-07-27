@@ -1,7 +1,7 @@
 <template>
   <div class="users-edit">
     <h2>Edit Your Profile</h2>
-    
+
     <div class="edit-form">
       <form v-on:submit="editInfo()">  
         <label for="artist_name">Artist Name:</label>
@@ -23,14 +23,17 @@
         <input type="text" v-model="user.password"><br>
 
         <input type="submit" value="Update"><br>
-
-        <!-- <div class="edit-img">
-          <img :src="user.profile_picture" alt="profile_picture"><br>
-          <label>Image</label>
-          <input type="file" v-on:change="setFile($event)" ref="fileInput">
-        </div> -->
-
       </form>
+    </div>
+
+    <div class="edit-img">
+      <img :src="user.profile_picture" alt="profile_picture"><br>
+      <label>Image</label>
+      <input type="file" v-on:change="setFile($event)" ref="fileInput">
+    </div>
+
+    <div class="delete-account">
+      <button v-on:click="deleteAccount()">Delete Account</button>
     </div>
 
   </div>
@@ -77,6 +80,14 @@ export default {
         .catch(error => {
           this.errors = error.response.data.errors;
         });
+    },
+    deleteAccount: function() {
+      if (confirm("Are you sure you want to delete your account?")) {
+        axios.delete(`/api/users/${this.user.id}`).then(response => {
+          console.log("Account deleted.", response.data);
+          this.$router.push("/signup");
+        });
+      }
     }
   }
 };
