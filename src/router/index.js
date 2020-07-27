@@ -8,6 +8,7 @@ import UsersShow from "../views/UsersShow.vue";
 import UsersEdit from "../views/UsersEdit.vue";
 import SongsNew from "../views/SongsNew.vue";
 import SongsShow from "../views/SongsShow.vue";
+import SongsEdit from "../views/SongsEdit.vue";
 
 Vue.use(VueRouter);
 
@@ -59,6 +60,11 @@ const routes = [
     path: "/songs/:id",
     name: "songs-show",
     component: SongsShow
+  },
+  {
+    path: "/songs/:id/edit",
+    name: "songs-edit",
+    component: SongsEdit
   }
 ];
 
