@@ -13,8 +13,14 @@
       </div>
 
       <!--New Comment-->
+      <h2>Make a New Comment</h2>
       <div class="new-comment">
-        <input type="text">
+        <label>Tags:</label>
+        <input type="text"><br>
+        <label>Notes:</label>
+        <input type="text"><br>
+        <label>Author:</label>
+        <input type="text"><br>
         <input type="submit" v-on:click="addComment()" value="Add Comment"><br>
       </div>
 
@@ -42,7 +48,8 @@ export default {
     return {
       song: {},
       song_id: localStorage.getItem("song_id"),
-      comments: []
+      comments: [],
+      tag_ids: []
     };
   },
   created: function() {
@@ -53,7 +60,20 @@ export default {
     });
   },
   methods: {
-    addComment() {},
+    addComment() {
+      var formData = new FormData();
+      formData.append("author", this.comment.author);
+      formData.append("notes", this.comment.notes);
+      formData.append("tags", this.comment.tags);
+
+      axios
+        .post(`/api/song/${this.$route.params.id}`, formData)
+        .then(response => {
+          console.log(response.data);
+          this.comment = response.data;
+          console.log(this.comment);
+        });
+    },
 
     deleteSong: function() {
       if (confirm("Are you sure you want to delete your song?")) {

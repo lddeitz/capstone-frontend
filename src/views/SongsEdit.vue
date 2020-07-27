@@ -2,7 +2,12 @@
   <div class="songs-edit">
     <h2>Edit Your Song</h2>
       <div class="edit-form">
-        <form v-on:submit="editInfo()">  
+        <form v-on:submit.prevent="editInfo()">  
+
+          <ul>
+            <li class="text-danger" v-for="error in errors">{{ error }}</li>
+          </ul>
+
           <label for="artist_name">Title:</label>
           <input type="text" v-model="song.title"><br>
 
@@ -16,19 +21,12 @@
           <input type="text" v-model="song.url"><br>
 
           <label for="email">Image:</label>
-          <input type="text" v-model="song.img_url"><br>
+          <!-- <input type="text" v-model="song.img_url"><br> -->
+          <input type="file" v-on:change="setFile($event)" ref="fileInput">
 
           <input type="submit" value="Update"><br>
         </form>
       </div>
-
-    <!--Cloudinary Functionality-->
-    
-    <!-- <div class="edit-img">
-      <img :src="song.img_url" alt="img_url"><br>
-      <label>Image</label>
-      <input type="file" v-on:change="setFile($event)" ref="fileInput">
-    </div> -->
 
     <!-- <div class="delete-song">
       <button v-on:click="deleteSong()">Delete Song</button>
@@ -42,15 +40,21 @@ export default {
   data: function() {
     return {
       song: {},
-      song_id: localStorage.getItem("song_id")
+      errors: [],
+      song_id: localStorage.getItem("song_id"),
+      title: "",
+      description: "",
+      keywords: "",
+      url: "",
+      imageFile: ""
     };
   },
   created: function() {
-    axios.get(`/api/songs/${this.$route.params.id}`).then(response => {
-      console.log(response.data);
-      this.song = response.data;
-      console.log(this.song);
-    });
+    // axios.get(`/api/songs/${this.$route.params.id}`).then(response => {
+    //   console.log(response.data);
+    //   this.song = response.data;
+    //   console.log(this.song);
+    // });
   },
   methods: {
     setFile: function(event) {

@@ -8,13 +8,12 @@
 
     <div class="song-info">
       <h4 v-for="song in user.songs"> Title: {{ song.title }}</h4>
-      <!-- <h4 v-for="song in user.songs"> Description: {{ song.img_url }}</h4> -->
       <img v-for="song in user.songs" :src="song.img_url"><br>
 
       <button v-on:click="editRedirect()" type="button">More Info</button>
 
       <!-- <div v-if="user === current_user"> -->
-        <router-link to="/users/1/edit" tag="button">Edit</router-link>
+        <router-link to="/users/1/edit">Edit</router-link>
       <!-- </div> -->
     </div>
 

@@ -6,8 +6,6 @@
       <router-link to="/signup">Signup</router-link> | 
       <router-link to="/login">Login</router-link> |
       <router-link to="/logout">Logout</router-link> |
-      <router-link to="/users-show">Users Show</router-link> | 
-      <router-link to="/users-edit">Users Edit</router-link> | 
       <router-link to="/songs/new">New Song</router-link>
     </div>
     <router-view/>
