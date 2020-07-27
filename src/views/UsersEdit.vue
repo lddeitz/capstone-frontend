@@ -1,0 +1,86 @@
+<template>
+  <div class="users-edit">
+    <h2>Edit Your Profile</h2>
+    
+    <div class="edit-form">
+      <form v-on:submit="editInfo()">  
+        <label for="artist_name">Artist Name:</label>
+        <input type="text" v-model="user.artist_name"><br>
+
+        <label for="first_name">First Name:</label>
+        <input type="text" v-model="user.first_name"><br>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" v-model="user.last_name"><br>
+
+        <label for="bio">Bio:</label>
+        <input type="text" v-model="user.bio"><br>
+
+        <label for="email">Email:</label>
+        <input type="text" v-model="user.email"><br>
+
+        <label for="email">Password:</label>
+        <input type="text" v-model="user.password"><br>
+
+        <input type="submit" value="Update"><br>
+
+        <!-- <div class="edit-img">
+          <img :src="user.profile_picture" alt="profile_picture"><br>
+          <label>Image</label>
+          <input type="file" v-on:change="setFile($event)" ref="fileInput">
+        </div> -->
+
+      </form>
+    </div>
+
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+export default {
+  data: function() {
+    return {
+      user: {},
+      user_id: localStorage.getItem("user_id")
+    };
+  },
+  created: function() {
+    axios.get(`/api/users/${this.$route.params.id}`).then(response => {
+      console.log(response.data);
+      this.user = response.data;
+      console.log(this.user);
+    });
+  },
+  methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
+    editInfo: function() {
+      var params = {
+        artist_name: this.user.artist_name,
+        first_name: this.user.first_name,
+        last_name: this.user.last_name,
+        bio: this.user.bio,
+        email: this.user.email,
+        password: this.user.password
+        // profile_picture: this.user.profile_picture
+      };
+      axios
+        .patch(`/api/users/${this.user.id}`, params)
+        .then(response => {
+          console.log(response.data);
+          this.user = response.data;
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+        });
+    }
+  }
+};
+</script>
+
+<style>
+</style>

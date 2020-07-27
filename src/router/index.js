@@ -5,6 +5,8 @@ import Signup from "../views/Signup.vue";
 import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import UsersShow from "../views/UsersShow.vue";
+import UsersEdit from "../views/UsersEdit.vue";
+import SongsNew from "../views/SongsNew.vue";
 
 Vue.use(VueRouter);
 
@@ -41,6 +43,16 @@ const routes = [
     path: "/users/:id",
     name: "users-show",
     component: UsersShow
+  },
+  {
+    path: "/users/:id/edit",
+    name: "users-edit",
+    component: UsersEdit
+  },
+  {
+    path: "/songs/new",
+    name: "songs-new",
+    component: SongsNew
   }
 ];
 

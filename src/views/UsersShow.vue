@@ -7,15 +7,19 @@
     </div>
 
     <div class="song-info">
-      <h4 v-for="song in user.songs">{{ song.title }}</h4>
-      <h4 v-for="song in user.songs">{{ song }}</h4>
-      <img v-for="song in songs" :src="song">
-      <p> {{ user.songs }} </p>
+      <h4 v-for="song in user.songs"> Title: {{ song.title }}</h4>
+      <!-- <h4 v-for="song in user.songs"> Description: {{ song.img_url }}</h4> -->
+      <img v-for="song in user.songs" :src="song.img_url"><br>
+
+      <button v-on:click="editRedirect()" type="button">More Info</button>
+
+      <!-- <div v-if="user === current_user"> -->
+        <router-link to="/users/1/edit" tag="button">Edit</router-link>
+      <!-- </div> -->
     </div>
 
     <div class="buttons">
-      <!-- <button type="button" v-on:click="">More Info</button>
-      <button type="button" v-on:click="">New Song</button>
+      <!-- <button type="button" v-on:click="">New Song</button>
       <button type="button" v-on:click="">Edit Profile</button> -->
     </div>
 
@@ -30,8 +34,6 @@ export default {
       user: {},
       user_id: localStorage.getItem("user_id"),
       songs: []
-      // artistName: "",
-      // profilePicture: ""
     };
   },
   created: function() {
@@ -42,7 +44,7 @@ export default {
     });
   },
   methods: {
-    // submit: function() {}
+    editRedirect() {}
   }
 };
 </script>
