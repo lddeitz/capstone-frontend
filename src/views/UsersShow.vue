@@ -8,18 +8,15 @@
 
     <div class="song-info">
       <h4 v-for="song in user.songs"> Title: {{ song.title }}</h4>
-      <img v-for="song in user.songs" :src="song.img_url"><br>
+      <a href="/songs/"><img v-for="song in user.songs" :src="song.img_url"></a><br>
 
       <button v-on:click="editRedirect()" type="button">More Info</button>
 
       <!-- <div v-if="user === current_user"> -->
-        <router-link to="/users/1/edit">Edit</router-link>
+        <!-- <router-link to="/users/1/edit">Edit</router-link> -->
+      <button v-on:click="editRedirect()" type="button">Edit Profile</button>
+      <button v-on:click="newSongRedirect()" type="button">New Song</button>
       <!-- </div> -->
-    </div>
-
-    <div class="buttons">
-      <!-- <button type="button" v-on:click="">New Song</button>
-      <button type="button" v-on:click="">Edit Profile</button> -->
     </div>
 
   </div>
@@ -43,7 +40,16 @@ export default {
     });
   },
   methods: {
-    editRedirect() {}
+    editRedirect() {
+      axios.get(`/api/users/${this.$route.params.id}`).then(response => {
+        this.$router.push(`/users/${response.data.user_id}/edit`);
+      });
+    },
+    newSongRedirect() {
+      axios.get(`/api/songs/${this.$route.params.id}`).then(response => {
+        this.$router.push("/songs/new");
+      });
+    }
   }
 };
 </script>

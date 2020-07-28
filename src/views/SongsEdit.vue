@@ -20,9 +20,9 @@
           <label for="bio">URL:</label>
           <input type="text" v-model="song.url"><br>
 
-          <label for="email">Image:</label>
+          <!-- <label for="email">Image:</label> -->
           <!-- <input type="text" v-model="song.img_url"><br> -->
-          <input type="file" v-on:change="setFile($event)" ref="fileInput">
+          <!-- <input type="file" v-on:change="setFile($event)" ref="fileInput"> -->
 
           <input type="submit" value="Update"><br>
         </form>
@@ -75,6 +75,7 @@ export default {
         .then(response => {
           console.log(response.data);
           this.song = response.data;
+          this.$router.push(`/users/${response.data.user_id}`);
         })
         .catch(error => {
           this.errors = error.response.data.errors;
