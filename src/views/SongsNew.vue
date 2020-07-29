@@ -2,27 +2,22 @@
   <div class="songs-new">
     <h2>Submit a Song</h2>
 
-    <form v-on:submit="newSong()">
+    <form v-on:submit.prevent="createSong()">
 
-        <label for="title">Title:</label>
-        <input type="text" v-model="song.title"><br>
+        Title: <input type="text" v-model="newSongTitle"><br>
 
-        <label for="description">Description:</label>
-        <input type="text" v-model="song.description"><br>
+        Description: <input type="text" v-model="newSongDescription"><br>
 
-        <label for="keywords">Keywords:</label>
-        <input type="text" v-model="song.keywords"><br>
+        Keywords: <input type="text" v-model="newSongKeywords"><br>
 
-        <label for="url">URL:</label>
-        <input type="text" v-model="song.url"><br>
+        URL: <input type="text" v-model="newSongUrl"><br>
 
-        <label for="img_url">Artwork:</label>
-        <input type="text" v-model="song.img_url"><br>
+        Artwork: <input type="text" v-model="newSongImgUrl"><br>
 
         <!-- <label>Artwork:</label>
         <input type="file" v-on:change="setFile($event)" ref="fileInput"> -->
 
-        <input type="submit" value="Create"><br>
+    <input type="submit" class="btn btn-primary" value="Submit">
 
     </form>
   </div>
@@ -35,27 +30,29 @@ export default {
     return {
       song: {},
       user: {},
-      title: "",
-      description: "",
-      keywords: "",
-      url: "",
-      img_url: ""
+      newSongTitle: "",
+      newSongDescription: "",
+      newSongKeywords: "",
+      newSongUrl: "",
+      newSongImgUrl: ""
       // user_id: localStorage.getItem("user_id"),
       // song_id: localStorage.getItem("id")
     };
   },
   created: function() {},
   methods: {
-    newSong: function() {
-      var formData = new FormData();
-      formData.append("title", this.song.title);
-      formData.append("description", this.song.description);
-      formData.append("keywords", this.song.keywords);
-      formData.append("url", this.song.url);
-      formData.append("img_url", this.song.img_url);
+    createSong: function() {
+      var params = {
+        title: this.newSongTitle,
+        description: this.newSongDescription,
+        keywords: this.newSongKeywords,
+        url: this.newSongUrl,
+        img_url: this.newSongImgUrl
+      };
       axios
-        .post("/api/songs", formData)
+        .post("/api/songs", params)
         .then(response => {
+          console.log("Success", response.data);
           this.$router.push(`/songs/${response.data.id}`);
         })
         .catch(error => {
@@ -70,4 +67,7 @@ export default {
   }
 };
 </script>
+
+
+
 

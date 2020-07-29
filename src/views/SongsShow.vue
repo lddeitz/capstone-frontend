@@ -12,24 +12,30 @@
         <p> {{song.url}} </p>
       </div>
 
-      <!--New Comment-->
-      <h2>Make a New Comment</h2>
-      <div class="new-comment">
-        <label>Tags:</label>
-        <input type="text"><br>
-        <label>Notes:</label>
-        <input type="text"><br>
-        <label>Author:</label>
-        <input type="text"><br>
-        <input type="submit" v-on:click="addComment()" value="Add Comment"><br>
+      <!-- New Comment-->
+      <h2>New Comment</h2>
+      <form v-on:submit.prevent="createComment(song)">
+          Tags:<input type="text" v-model="newCommentTags"><br>
+          Notes:<input type="text" v-model="newCommentNotes"><br>
+          Author:<input type="text" v-model="newCommentAuthor"><br>
+          Song Timestamp:<input type="text" v-model="newSongTimestamp"><br>
+        <input type="submit" class="btn btn-primary" value="Comment">
+      </form>
       </div>
 
       <!--All Comments-->
+
+      <!-- <div v-if="comments[0].more"> -->
       <div class="total-comments">
-        <p v-for="comment in song.comments"> {{ comment.author }} </p>
-        <p v-for="comment in song.comments"> {{ comment.notes }} </p>
-        <p v-for="comment in song.comments"> {{ comment.song_timestamp }} </p>
+        <div v-for="comment in song.comments">
+          <strong><p>{{ comment.author }}</p></strong>
+          <p>{{ comment.notes }}</p>
+          <p>{{ comment.tags }}</p>
+          <p>{{ comment.song_timestamp }}</p>
+          <br>
+        </div>
       </div>
+      <!-- </div> -->
 
       <!--Song Delete (for uploader only)-->
       <div class="delete-song">
@@ -43,13 +49,21 @@
 
 <script>
 import axios from "axios";
+
 export default {
   data: function() {
     return {
       song: {},
-      song_id: localStorage.getItem("song_id"),
+      // song_id: localStorage.getItem("song_id"),
+      song_id: "",
       comments: [],
-      tag_ids: []
+      tag_ids: [],
+      newCommentNotes: "",
+      newCommentAuthor: "",
+      newSongTimestamp: "",
+      newCommentTags: [],
+      artist_name: "",
+      errors: []
     };
   },
   created: function() {
@@ -60,18 +74,32 @@ export default {
     });
   },
   methods: {
-    addComment() {
-      var formData = new FormData();
-      formData.append("author", this.comment.author);
-      formData.append("notes", this.comment.notes);
-      formData.append("tags", this.comment.tags);
+    createComment: function(song) {
+      // var formData = new FormData();
+      // formData.append("notes", this.comment.notes);
+      // formData.append("author", this.comment.author);
+      // formData.append("song_timestamp", this.comment.song_timestamp);
+      // formData.append("tags", this.comment.tags);
+
+      var params = {
+        song_id: song.id,
+        notes: this.newCommentNotes,
+        author: this.newCommentAuthor,
+        song_timestamp: this.newSongTimestamp
+        // tags: this.newCommentTags
+      };
 
       axios
-        .post(`/api/song/${this.$route.params.id}`, formData)
+        .post("/api/comments", params)
         .then(response => {
-          console.log(response.data);
-          this.comment = response.data;
-          console.log(this.comment);
+          // console.log(response.data);
+          this.comments.push(response.data);
+          // this.comment = response.data;
+          // console.log(this.comment);
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+          console.log(this.errors);
         });
     },
 

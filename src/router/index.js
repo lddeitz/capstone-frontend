@@ -57,14 +57,14 @@ const routes = [
     component: SongsNew
   },
   {
-    path: "/songs/:id",
-    name: "songs-show",
-    component: SongsShow
-  },
-  {
     path: "/songs/:id/edit",
     name: "songs-edit",
     component: SongsEdit
+  },
+  {
+    path: "/songs/:id",
+    name: "songs-show",
+    component: SongsShow
   }
 ];
 
