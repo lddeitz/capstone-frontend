@@ -2,10 +2,13 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> | 
       <router-link to="/signup">Signup</router-link> | 
       <div v-if="isLoggedIn()">
         <router-link to="/logout">Logout</router-link> |
+
+        <router-link :to="`/users/${user_id}/`">My Profile</router-link> | 
+
+        <router-link to="/songs/new">New Song</router-link> | 
       </div>
 
       <div v-if="!isLoggedIn()">
@@ -39,20 +42,20 @@
 }
 </style>
 
-<!--script code wasn't here before-->
 <script>
 export default {
   data: function() {
-    return {};
+    return {
+      user: {},
+      songs: [],
+      user_id: localStorage.getItem("user_id")
+    };
   },
   methods: {
     // returns true or false depending on jwt in localstorage
     isLoggedIn: function() {
       return localStorage.getItem("jwt");
     }
-    // getUserId: function() {
-    //   return localStorage.getItem("user_id");
-    // },
   }
 };
 </script>

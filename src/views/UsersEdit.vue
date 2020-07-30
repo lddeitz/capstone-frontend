@@ -28,8 +28,8 @@
 
     <div class="edit-img">
       <img :src="user.profile_picture" alt="profile_picture"><br>
-      <!-- <label>Image</label>
-      <input type="file" v-on:change="setFile($event)" ref="fileInput"> -->
+      <label>Image</label>
+      <input type="file" v-on:change="setFile($event)" ref="fileInput">
     </div>
 
     <div class="delete-account">
@@ -56,6 +56,11 @@ export default {
     });
   },
   methods: {
+    // setFile: function(event) {
+    //   if (event.target.files.length > 0) {
+    //     this.image = event.target.files[0];
+    //   }
+    // },
     editInfo: function() {
       var params = {
         artist_name: this.user.artist_name,
@@ -67,11 +72,10 @@ export default {
         // profile_picture: this.user.profile_picture
       };
       axios
-        .patch(`/api/users/${this.user.id}`, params)
+        .patch(`/api/users/${this.user.user_id}`, params)
         .then(response => {
           console.log(response.data);
           this.user = response.data;
-          this.$router.push(`/users/${response.data.user_id}`);
         })
         .catch(error => {
           this.errors = error.response.data.errors;

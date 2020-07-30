@@ -4,41 +4,48 @@
     <div class="song-info">
       <h2> {{ song.title }} </h2><br>
       <img :src="song.img_url" alt="album art"><br>
-      <p> {{ song.description }} </p><br>
-      <p> {{ song.keywords }} </p><br>
+      <strong>Details:</strong> <p> {{ song.description }} </p><br>
+      Keywords:<p> {{ song.keywords }} </p><br>
 
       <!--Track Embed-->
       <div class="song-embed">
-        <p> {{song.url}} </p>
+        {{song.url}} 
       </div>
 
       <!-- New Comment-->
       <h2>New Comment</h2>
-      <form v-on:submit.prevent="createComment(song)">
-          Tags:<input type="text" v-model="newCommentTags"><br>
+      <form v-on:submit.prevent="createComment()">
           Notes:<input type="text" v-model="newCommentNotes"><br>
-          Author:<input type="text" v-model="newCommentAuthor"><br>
+          <div v-if="!$parent.isLoggedIn()">
+            Author:<input type="text" v-model="newCommentAuthor"><br>
+          </div>
           Song Timestamp:<input type="text" v-model="newSongTimestamp"><br>
+          <div v-for="tag in tags">
+            <input :value="tag.id" type="checkbox" :id="tag.id" v-model="tagIds">
+            <label :for="tag.id">{{ tag.name }}</label>
+          </div>
+          {{ tagIds }}
         <input type="submit" class="btn btn-primary" value="Comment">
       </form>
-      </div>
 
       <!--All Comments-->
 
-      <!-- <div v-if="comments[0].more"> -->
       <div class="total-comments">
         <div v-for="comment in song.comments">
           <strong><p>{{ comment.author }}</p></strong>
           <p>{{ comment.notes }}</p>
           <p>{{ comment.tags }}</p>
           <p>{{ comment.song_timestamp }}</p>
+          <button v-on:click="editComment(comment)">Edit</button>
+          <button v-on:click="deleteComment(comment)">Delete</button>
           <br>
         </div>
       </div>
-      <!-- </div> -->
+
 
       <!--Song Delete (for uploader only)-->
       <div class="delete-song">
+        <router-link :to="`/songs/${song.id}/edit`">Edit Song</router-link>
         <button v-on:click="deleteSong()">Delete Song</button>
       </div>
 
@@ -54,53 +61,70 @@ export default {
   data: function() {
     return {
       song: {},
-      // song_id: localStorage.getItem("song_id"),
-      song_id: "",
-      comments: [],
-      tag_ids: [],
       newCommentNotes: "",
       newCommentAuthor: "",
       newSongTimestamp: "",
-      newCommentTags: [],
-      artist_name: "",
-      errors: []
+      tagIds: [],
+      errors: [],
+      tags: []
     };
   },
   created: function() {
     axios.get(`/api/songs/${this.$route.params.id}`).then(response => {
       console.log(response.data);
       this.song = response.data;
-      console.log(this.song);
+    });
+    axios.get(`/api/tags/`).then(response => {
+      console.log(response.data);
+      this.tags = response.data;
     });
   },
   methods: {
-    createComment: function(song) {
-      // var formData = new FormData();
-      // formData.append("notes", this.comment.notes);
-      // formData.append("author", this.comment.author);
-      // formData.append("song_timestamp", this.comment.song_timestamp);
-      // formData.append("tags", this.comment.tags);
-
+    createComment: function() {
       var params = {
-        song_id: song.id,
+        song_id: this.song.id,
         notes: this.newCommentNotes,
         author: this.newCommentAuthor,
-        song_timestamp: this.newSongTimestamp
-        // tags: this.newCommentTags
+        song_timestamp: this.newSongTimestamp,
+        tag_ids: this.tagIds
       };
 
       axios
         .post("/api/comments", params)
         .then(response => {
-          // console.log(response.data);
-          this.comments.push(response.data);
-          // this.comment = response.data;
-          // console.log(this.comment);
+          this.song.comments.push(response.data);
         })
         .catch(error => {
           this.errors = error.response.data.errors;
           console.log(this.errors);
         });
+    },
+
+    editComment: function(comment) {
+      var params = {
+        notes: comment.notes,
+        author: comment.author,
+        song_timestamp: comment.song_timestamp,
+        tags: comment.tags
+      };
+
+      axios
+        .patch(`/api/comments/${this.comment.id}`, params)
+        .then(response => {
+          this.$router.push(`/songs/${response.data.id}`);
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+        });
+    },
+
+    deleteComment: function(comment) {
+      if (confirm("Are you sure you want to delete this comment?")) {
+        axios.delete(`/api/comments/${comment.id}`).then(response => {
+          console.log("Comment deleted.", response.data);
+          // splice comment out of comment array
+        });
+      }
     },
 
     deleteSong: function() {

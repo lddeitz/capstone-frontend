@@ -7,16 +7,12 @@
     </div>
 
     <div class="song-info">
-      <h4 v-for="song in user.songs"> Title: {{ song.title }}</h4>
-      <a href="/songs/"><img v-for="song in user.songs" :src="song.img_url"></a><br>
-
-      <button v-on:click="editRedirect()" type="button">More Info</button>
-
-      <!-- <div v-if="user === current_user"> -->
-        <!-- <router-link to="/users/1/edit">Edit</router-link> -->
-      <button v-on:click="editRedirect()" type="button">Edit Profile</button>
-      <button v-on:click="newSongRedirect()" type="button">New Song</button>
-      <!-- </div> -->
+      <div v-for="song in user.songs">
+        <h3>{{ song.title }}</h3>
+        <img :src="song.img_url"><br>
+        <router-link :to="`/songs/${song.id}/edit`">Edit Song</router-link>
+      </div>
+        <router-link :to="`/users/${user.id}/edit`">Edit Profile</router-link>
     </div>
 
   </div>
@@ -28,7 +24,6 @@ export default {
   data: function() {
     return {
       user: {},
-      user_id: localStorage.getItem("user_id"),
       songs: []
     };
   },
@@ -46,8 +41,13 @@ export default {
       });
     },
     newSongRedirect() {
-      axios.get(`/api/songs/${this.$route.params.id}`).then(response => {
+      axios.post("/api/songs/").then(response => {
         this.$router.push("/songs/new");
+      });
+    },
+    editSongRedirect() {
+      axios.get(`/api/songs/${this.$route.params.id}`).then(response => {
+        this.$router.push(`/songs/${this.$route.params.id}/edit`);
       });
     }
   }

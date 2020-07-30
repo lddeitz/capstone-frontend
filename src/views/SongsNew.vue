@@ -10,12 +10,9 @@
 
         Keywords: <input type="text" v-model="newSongKeywords"><br>
 
-        URL: <input type="text" v-model="newSongUrl"><br>
+        Embed Link: <input type="text" v-model="newSongUrl"><br>
 
-        Artwork: <input type="text" v-model="newSongImgUrl"><br>
-
-        <!-- <label>Artwork:</label>
-        <input type="file" v-on:change="setFile($event)" ref="fileInput"> -->
+        Artwork: <input type="file" v-on:change="setFile($event)" ref="fileInput">
 
     <input type="submit" class="btn btn-primary" value="Submit">
 
@@ -34,7 +31,8 @@ export default {
       newSongDescription: "",
       newSongKeywords: "",
       newSongUrl: "",
-      newSongImgUrl: ""
+      // newSongImgUrl: "",
+      imageFile: ""
       // user_id: localStorage.getItem("user_id"),
       // song_id: localStorage.getItem("id")
     };
@@ -42,15 +40,14 @@ export default {
   created: function() {},
   methods: {
     createSong: function() {
-      var params = {
-        title: this.newSongTitle,
-        description: this.newSongDescription,
-        keywords: this.newSongKeywords,
-        url: this.newSongUrl,
-        img_url: this.newSongImgUrl
-      };
+      var formData = new FormData();
+      formData.append("title", this.newSongTitle);
+      formData.append("description", this.newSongDescription);
+      formData.append("keywords", this.newSongKeywords);
+      formData.append("url", this.newSongUrl);
+      formData.append("image_file", this.imageFile);
       axios
-        .post("/api/songs", params)
+        .post("/api/songs", formData)
         .then(response => {
           console.log("Success", response.data);
           this.$router.push(`/songs/${response.data.id}`);
@@ -58,12 +55,12 @@ export default {
         .catch(error => {
           this.errors = error.response.data.errors;
         });
+    },
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.imageFile = event.target.files[0];
+      }
     }
-    // setFile: function(event) {
-    //   if (event.target.files.length > 0) {
-    //     this.imageFile = event.target.files[0];
-    //   }
-    // }
   }
 };
 </script>
