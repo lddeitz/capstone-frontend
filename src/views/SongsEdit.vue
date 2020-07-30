@@ -40,8 +40,8 @@ export default {
       title: "",
       description: "",
       keywords: "",
-      url: "",
-      imageFile: ""
+      url: ""
+      // imageFile: ""
     };
   },
   created: function() {
@@ -54,15 +54,21 @@ export default {
     });
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.song.img_url = event.target.files[0];
+      }
+    },
     editSong: function() {
       var formData = new FormData();
+
       formData.append("title", this.song.title);
       formData.append("description", this.song.description);
       formData.append("keywords", this.song.keywords);
       formData.append("url", this.song.url);
-      formData.append("image_file", this.imageFile);
-      if (this.event.image_file) {
-        formData.append("image_file", this.song.image_file);
+      // formData.append("image_file", this.imageFile);
+      if (this.song.img_url) {
+        formData.append("img_url", this.song.img_url);
       }
       axios
         .patch(`/api/songs/${this.song.id}`, formData)
@@ -72,11 +78,6 @@ export default {
         .catch(error => {
           this.errors = error.response.data.errors;
         });
-    },
-    setFile: function(event) {
-      if (event.target.files.length > 0) {
-        this.image = event.target.files[0];
-      }
     }
     // deleteSong: function() {
     //   if (confirm("Are you sure you want to delete your song?")) {
