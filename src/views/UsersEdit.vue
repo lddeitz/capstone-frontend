@@ -22,15 +22,13 @@
         <label for="email">Password:</label>
         <input type="text" v-model="user.password"><br>
 
+        <img :src="user.profile_picture" alt="profile_picture"><br>
+        <label>Update Profile Picture</label>
+        <input type="file" v-on:change="setFile($event)" ref="fileInput">
+
         <input type="submit" value="Update"><br>
       </form>
     </div>
-
-    <!-- <div class="edit-img">
-      <img :src="user.profile_picture" alt="profile_picture"><br>
-      <label>Image</label>
-      <input type="file" v-on:change="setFile($event)" ref="fileInput">
-    </div> -->
 
     <div class="delete-account">
       <button v-on:click="deleteAccount()">Delete Account</button>
@@ -58,23 +56,46 @@ export default {
     });
   },
   methods: {
-    // setFile: function(event) {
-    //   if (event.target.files.length > 0) {
-    //     this.image = event.target.files[0];
-    //   }
-    // },
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.user.img_url = event.target.files[0];
+      }
+    },
     editAccount: function() {
-      var params = {
-        artist_name: this.user.artist_name,
-        first_name: this.user.first_name,
-        last_name: this.user.last_name,
-        bio: this.user.bio,
-        email: this.user.email,
-        password: this.user.password
-        // profile_picture: this.user.profile_picture
-      };
+      var formData = new FormData();
+
+      formData.append("artist_name)", this.user.artist_name);
+      formData.append("first_name", this.user.first_name);
+      formData.append("last_name", this.user.last_name);
+      formData.append("bio", this.user.bio);
+      formData.append("email", this.user.email);
+      formData.append("password", this.user.password);
+      formData.append("img_url", this.user.img_url);
       axios
-        .patch(`/api/users/${this.user.id}`, params)
+        .patch(`/api/users/${this.user.id}`, formData)
+        .then(response => {
+          // console.log(response.data);
+          // this.user = response.data;
+          this.$router.push(`/users/${this.user.id}`);
+        })
+        .catch(error => {
+          this.errors = error.response.data.errors;
+        });
+      // var params = {
+      //   artist_name: this.user.artist_name,
+      //   first_name: this.user.first_name,
+      //   last_name: this.user.last_name,
+      //   bio: this.user.bio,
+      //   email: this.user.email,
+      //   password: this.user.password
+      //   profile_picture: this.user.profile_picture
+      // };
+    },
+    updateProfilePicture: function() {
+      var formData = new FormData();
+      formData.append("img_url", this.user.img_url);
+      axios
+        .patch(`/api/users/${this.user.id}`, formData)
         .then(response => {
           // console.log(response.data);
           // this.user = response.data;
