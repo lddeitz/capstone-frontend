@@ -16,7 +16,7 @@
 
           Embed Link:<input type="text" v-model="song.url"><br>
 
-          Artwork: <input type="file" v-on:change="setFile($event)" ref="fileInput">
+          <!-- Artwork: <input type="file" v-on:change="setFile($event)" ref="fileInput"> -->
 
           <input type="submit" class="btn btn-primary" value="Update"><br>
 
@@ -60,7 +60,7 @@ export default {
       formData.append("description", this.song.description);
       formData.append("keywords", this.song.keywords);
       formData.append("url", this.song.url);
-      formData.append("image_file", this.imageFile);
+      // formData.append("image_file", this.imageFile);
       axios
         .patch(`/api/songs/${this.song.id}`, formData)
         .then(response => {
@@ -69,12 +69,12 @@ export default {
         .catch(error => {
           this.errors = error.response.data.errors;
         });
-    },
-    setFile: function(event) {
-      if (event.target.files.length > 0) {
-        this.image = event.target.files[0];
-      }
     }
+    // setFile: function(event) {
+    //   if (event.target.files.length > 0) {
+    //     this.image = event.target.files[0];
+    //   }
+    // }
     // deleteSong: function() {
     //   if (confirm("Are you sure you want to delete your song?")) {
     //     axios.delete(`/api/songs/${this.song.id}`).then(response => {

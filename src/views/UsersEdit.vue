@@ -3,7 +3,7 @@
     <h2>Edit Your Profile</h2>
 
     <div class="edit-form">
-      <form v-on:submit="editInfo()">  
+      <form v-on:submit.prevent="editAccount()">  
         <label for="artist_name">Artist Name:</label>
         <input type="text" v-model="user.artist_name"><br>
 
@@ -26,11 +26,11 @@
       </form>
     </div>
 
-    <div class="edit-img">
+    <!-- <div class="edit-img">
       <img :src="user.profile_picture" alt="profile_picture"><br>
       <label>Image</label>
       <input type="file" v-on:change="setFile($event)" ref="fileInput">
-    </div>
+    </div> -->
 
     <div class="delete-account">
       <button v-on:click="deleteAccount()">Delete Account</button>
@@ -44,7 +44,9 @@ import axios from "axios";
 export default {
   data: function() {
     return {
+      errors: [],
       user: {},
+      // user_id: this.user.id
       user_id: localStorage.getItem("user_id")
     };
   },
@@ -61,7 +63,7 @@ export default {
     //     this.image = event.target.files[0];
     //   }
     // },
-    editInfo: function() {
+    editAccount: function() {
       var params = {
         artist_name: this.user.artist_name,
         first_name: this.user.first_name,
@@ -72,10 +74,11 @@ export default {
         // profile_picture: this.user.profile_picture
       };
       axios
-        .patch(`/api/users/${this.user.user_id}`, params)
+        .patch(`/api/users/${this.user.id}`, params)
         .then(response => {
-          console.log(response.data);
-          this.user = response.data;
+          // console.log(response.data);
+          // this.user = response.data;
+          this.$router.push(`/users/${this.user.id}`);
         })
         .catch(error => {
           this.errors = error.response.data.errors;
