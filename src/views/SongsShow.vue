@@ -1,56 +1,73 @@
 <template>
   <div class="songs-show">
+    <div v-if="song.title">
+      <div class="song-info">
+        <h2> {{ song.title }} </h2><br>
+        <img :src="song.img_url" alt="album art"><br>
+        <strong>Details:</strong> <p> {{ song.description }} </p><br>
+        <strong>Keywords:</strong><p> {{ song.keywords }} </p><br>
 
-    <div class="song-info">
-      <h2> {{ song.title }} </h2><br>
-      <img :src="song.img_url" alt="album art"><br>
-      <strong>Details:</strong> <p> {{ song.description }} </p><br>
-      Keywords:<p> {{ song.keywords }} </p><br>
-
-      <!--Track Embed-->
-      <div class="song-embed">
-        {{song.url}} 
-      </div>
-
-      <!-- New Comment-->
-      <h2>New Comment</h2>
-      <form v-on:submit.prevent="createComment()">
-          Notes:<input type="text" v-model="newCommentNotes"><br>
-          <div v-if="!$parent.isLoggedIn()">
-            Author:<input type="text" v-model="newCommentAuthor"><br>
-          </div>
-          Song Timestamp:<input type="text" v-model="newSongTimestamp"><br>
-          <div v-for="tag in tags">
-            <input :value="tag.id" type="checkbox" :id="tag.id" v-model="tagIds">
-            <label :for="tag.id">{{ tag.name }}</label>
-          </div>
-          {{ tagIds }}
-        <input type="submit" class="btn btn-primary" value="Comment">
-      </form>
-
-      <!--All Comments-->
-
-      <div class="total-comments">
-        <div v-for="comment in song.comments">
-          <strong><p>{{ comment.author }}</p></strong>
-          <p>{{ comment.notes }}</p>
-          <p>{{ comment.tags }}</p>
-          <p>{{ comment.song_timestamp }}</p>
-          <button v-on:click="editComment(comment)">Edit</button>
-          <button v-on:click="deleteComment(comment)">Delete</button>
-          <br>
+        <!--Track Embed-->
+        <div class="song-embed">
+          {{song.url}} 
         </div>
+
+        <!-- New Comment-->
+        <h2>New Comment</h2>
+        <form v-on:submit.prevent="createComment(song)">
+            Notes:<input type="text" v-model="newCommentNotes"><br>
+            <div v-if="!$parent.isLoggedIn()">
+              Author:<input type="text" v-model="newCommentAuthor"><br>
+            </div>
+            Song Timestamp:<input type="text" v-model="newSongTimestamp"><br>
+            <div v-for="tag in tags">
+              <input :value="tag.id" type="checkbox" :id="tag.id" v-model="tagIds">
+              <label :for="tag.id">{{ tag.name }}</label>
+            </div>
+            {{ tagIds }}
+          <input type="submit" class="btn btn-primary" value="Comment">
+        </form>
+
+        <!--All Comments-->
+        <div class="total-comments">
+          <div v-for="comment in song.comments">
+            <strong><p>{{ comment.author }}</p></strong>
+            <p>{{ comment.notes }}</p>
+            <p>{{ comment.tags }}</p>
+            <p>{{ comment.song_timestamp }}</p>
+            <div v-if="$parent.getUserId() == comment.user_id">
+              <button v-on:click="showCommentEditForm(comment)">Edit</button>
+              <button v-on:click="deleteComment(comment)">Delete</button>
+            </div>
+            <br>
+            <!--Edit Comment Tag Box-->
+            <div v-if="comment == currentComment">
+              <form v-on:submit.prevent="editComment(currentComment)">
+                Notes:<input type="text" v-model="currentComment.notes"><br>
+
+                <div v-if="!$parent.isLoggedIn()">
+                  Author:<input type="text" v-model="currentComment.author"><br>
+                </div>
+                Song Timestamp:<input type="text" v-model="currentComment.song_timestamp"><br>
+                <div v-for="tag in tags">
+                  <input :value="tag.id" type="checkbox" :id="tag.id" v-model="selectedTagIds">
+                  <label :for="tag.id">{{ tag.name }}</label>
+                </div>
+                {{ tagIds }}
+                <input type="submit" class="btn btn-primary" value="Update Comment">
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!--Song Delete (for uploader only)-->
+        <div class="delete-song">
+          <router-link :to="`/songs/${song.id}/edit`">Edit Song</router-link>
+          <button v-on:click="deleteSong()">Delete Song</button>
+        </div>
+
       </div>
-
-
-      <!--Song Delete (for uploader only)-->
-      <div class="delete-song">
-        <router-link :to="`/songs/${song.id}/edit`">Edit Song</router-link>
-        <button v-on:click="deleteSong()">Delete Song</button>
-      </div>
-
     </div>
-
   </div>
 </template>
 
@@ -61,12 +78,18 @@ export default {
   data: function() {
     return {
       song: {},
+      song_id: "",
+      comments: [],
+      tagIds: [],
       newCommentNotes: "",
       newCommentAuthor: "",
       newSongTimestamp: "",
-      tagIds: [],
+      newCommentTags: [],
+      artist_name: "",
       errors: [],
-      tags: []
+      tags: [],
+      selectedTagIds: [],
+      currentComment: {}
     };
   },
   created: function() {
@@ -99,19 +122,23 @@ export default {
           console.log(this.errors);
         });
     },
+    showCommentEditForm: function(comment) {
+      this.currentComment = comment;
+      this.selectedTagIds = this.currentComment.tags.map(tag => tag.id);
+    },
 
     editComment: function(comment) {
       var params = {
         notes: comment.notes,
         author: comment.author,
         song_timestamp: comment.song_timestamp,
-        tags: comment.tags
+        tag_ids: this.selectedTagIds
       };
 
       axios
-        .patch(`/api/comments/${this.comment.id}`, params)
+        .patch(`/api/comments/${comment.id}`, params)
         .then(response => {
-          this.$router.push(`/songs/${response.data.id}`);
+          console.log(response.data);
         })
         .catch(error => {
           this.errors = error.response.data.errors;

@@ -6,7 +6,7 @@
       <div v-if="isLoggedIn()">
         <router-link to="/logout">Logout</router-link> |
 
-        <router-link :to="`/users/${user_id}/`">My Profile</router-link> | 
+        <router-link :to="`/users/${getUserId()}/`">My Profile</router-link> | 
 
         <router-link to="/songs/new">New Song</router-link> | 
       </div>
@@ -45,16 +45,15 @@
 <script>
 export default {
   data: function() {
-    return {
-      user: {},
-      songs: [],
-      user_id: localStorage.getItem("user_id")
-    };
+    return {};
   },
   methods: {
     // returns true or false depending on jwt in localstorage
     isLoggedIn: function() {
       return localStorage.getItem("jwt");
+    },
+    getUserId: function() {
+      return localStorage.getItem("user_id");
     }
   }
 };
