@@ -9,7 +9,7 @@
 
         <!--Track Embed-->
         <div class="song-embed">
-          {{song.url}} 
+          {{ song.url }}
         </div>
 
         <!-- New Comment-->

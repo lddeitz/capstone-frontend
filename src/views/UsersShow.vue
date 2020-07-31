@@ -9,7 +9,7 @@
     <div class="song-info">
       <div v-for="song in user.songs">
         <h3>{{ song.title }}</h3>
-        <img :src="song.img_url"><br>
+        <router-link :to="`/songs/${song.id}/`"><img :src="song.img_url"><br></router-link>
         <router-link :to="`/songs/${song.id}/edit`">Edit Song</router-link>
       </div>
         <router-link :to="`/users/${user.id}/edit`">Edit Profile</router-link>
