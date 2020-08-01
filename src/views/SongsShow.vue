@@ -9,10 +9,19 @@
 
         <!--Track Embed-->
         <div class="song-embed">
-          {{ song.url }}
+        <span v-html="song.url"></span> 
         </div>
 
-        <!-- New Comment-->
+        <!-- <div class="song-embed">
+          {{ song.url }}
+        </div> -->
+
+        <!--prismic.io-->
+        <!-- <div>
+        <prismic-embed :field="fields.songEmbed"/>
+        </div> -->
+
+        <!--New Comment-->
         <h2>New Comment</h2>
         <form v-on:submit.prevent="createComment(song)">
             Notes:<input type="text" v-model="newCommentNotes"><br>
@@ -33,7 +42,7 @@
           <div v-for="comment in song.comments">
             <strong><p>{{ comment.author }}</p></strong>
             <p>{{ comment.notes }}</p>
-            <p>{{ comment.tags }}</p>
+            <p v-for="tag in comment.tags">{{ tag.name }}</p>
             <p>{{ comment.song_timestamp }}</p>
             <div v-if="$parent.getUserId() == comment.user_id">
               <button v-on:click="showCommentEditForm(comment)">Edit</button>
@@ -77,6 +86,9 @@ import axios from "axios";
 export default {
   data: function() {
     return {
+      // fields: {
+      //   songEmbed: null
+      // },
       song: {},
       song_id: "",
       comments: [],
@@ -93,16 +105,31 @@ export default {
     };
   },
   created: function() {
+    // this.getContent(); //prismic.io
+
     axios.get(`/api/songs/${this.$route.params.id}`).then(response => {
       console.log(response.data);
       this.song = response.data;
     });
+
+    // axios.get(`/api/songs/${this.$route.params.url}`).then(response => {
+    //   console.log(response.data);
+    //   this.song.url = response.data;
+    // });
+
     axios.get(`/api/tags/`).then(response => {
       console.log(response.data);
       this.tags = response.data;
     });
   },
   methods: {
+    // getContent: function() {
+    //   var params = {
+    //     song_url: this.song.url
+    //   };
+    //   axios.get("/api/songs", params).then(song_url => {
+    //     this.fields.songEmbed = song_url.data.songEmbed;
+    //   });
     createComment: function() {
       var params = {
         song_id: this.song.id,
