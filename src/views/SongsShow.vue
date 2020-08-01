@@ -4,7 +4,7 @@
       <div class="song-info">
         <h2> {{ song.title }} </h2><br>
         <img :src="song.img_url" alt="album art"><br>
-        <strong>Details:</strong> <p> {{ song.description }} </p><br>
+        <strong>Details:</strong><p> {{ song.description }} </p><br>
         <strong>Keywords:</strong><p> {{ song.keywords }} </p><br>
 
         <!--Track Embed-->
@@ -24,7 +24,7 @@
         <!--New Comment-->
         <h2>New Comment</h2>
         <form v-on:submit.prevent="createComment(song)">
-            Notes:<input type="text" v-model="newCommentNotes"><br>
+            Notes:<textarea type="text" v-model="newCommentNotes"></textarea><br>
             <div v-if="!$parent.isLoggedIn()">
               Author:<input type="text" v-model="newCommentAuthor"><br>
             </div>
@@ -52,7 +52,7 @@
             <!--Edit Comment Tag Box-->
             <div v-if="comment == currentComment">
               <form v-on:submit.prevent="editComment(currentComment)">
-                Notes:<input type="text" v-model="currentComment.notes"><br>
+                Notes:<textarea type="textarea" v-model="currentComment.notes"></textarea><br>
 
                 <div v-if="!$parent.isLoggedIn()">
                   Author:<input type="text" v-model="currentComment.author"><br>
@@ -62,7 +62,7 @@
                   <input :value="tag.id" type="checkbox" :id="tag.id" v-model="selectedTagIds">
                   <label :for="tag.id">{{ tag.name }}</label>
                 </div>
-                {{ tagIds }}
+                {{ selectedTagIds }}
                 <input type="submit" class="btn btn-primary" value="Update Comment">
               </form>
             </div>
