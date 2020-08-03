@@ -1,8 +1,15 @@
 <template>
   <div class="users-edit">
-    <h2>Edit Your Profile</h2>
+    <!-- <h2>Edit Your Profile</h2> -->
+    <div class="container">
+      <div class="spacer-2x">&nbsp;</div>
+      <h2 class="section-title text-center mb-10">EDIT PROFILE</h2>
+      <div class="spacer-line border-primary">&nbsp;</div>
+      <div class="spacer-2x">&nbsp;</div>
+    </div>
+    <!-- / container -->
 
-    <div class="edit-form">
+    <!-- <div class="edit-form">
       <form v-on:submit.prevent="editUser()">
         <label for="artist_name">Artist Name:</label>
         <input type="text" v-model="user.artist_name" /><br />
@@ -35,6 +42,111 @@
           value="Update"
         /><br />
       </form>
+    </div> -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <p class="lead mt-3 mb-3"></p>
+          <form
+            class="validation-inner"
+            v-on:submit.prevent="editUser()"
+            id="form-validation"
+          >
+            <div class="form-group">
+              Username:
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="inputUsername"
+                placeholder="Username"
+                v-model="user.artist_name"
+              />
+            </div>
+            <!-- / form-group -->
+            <div class="form-group">
+              First Name:
+              <input
+                type="text"
+                class="form-control"
+                id="firstname"
+                name="inputFirstName"
+                placeholder="First Name"
+                v-model="user.first_name"
+                required
+              />
+            </div>
+            <!-- / form-group -->
+            <div class="form-group">
+              Last Name:
+              <input
+                type="text"
+                class="form-control"
+                id="lastname"
+                name="inputLastName"
+                placeholder="Last Name"
+                v-model="user.last_name"
+              />
+            </div>
+            <!-- / form-group -->
+            <div class="form-group">
+              Bio:
+              <textarea
+                id="bio"
+                class="form-control"
+                name="inputBio"
+                rows="5"
+                placeholder="Bio"
+                v-model="user.bio"
+                required
+              ></textarea>
+            </div>
+            <!-- / form-group -->
+            <div class="form-group">
+              Email:
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                name="inputEmail"
+                placeholder="Email"
+                v-model="user.email"
+              />
+            </div>
+            <!-- / form-group -->
+            <div class="form-group">
+              Password:
+              <input
+                type="text"
+                class="form-control"
+                id="password"
+                name="inputPassword"
+                placeholder="Password"
+                v-model="user.password"
+              />
+            </div>
+            <!-- / form-group -->
+            <div class="form-group">
+              Profile Picture:
+              <input
+                type="file"
+                class="form-control"
+                id="artwork"
+                name="inputProfilePicture"
+                placeholder="ProfilePicture"
+                v-on:change="setFile($event)"
+                ref="fileInput"
+              />
+            </div>
+            <!-- / form-group -->
+            <button type="submit" class="btn btn-primary pill m-1">
+              Update
+            </button>
+          </form>
+        </div>
+        <!-- / col-sm-6 -->
+      </div>
     </div>
 
     <img
@@ -44,7 +156,9 @@
     />
 
     <div class="delete-account">
-      <button v-on:click="deleteUser()">Delete Account</button>
+      <button class="btn btn-primary pill m-1" v-on:click="deleteUser()">
+        Delete Account
+      </button>
     </div>
   </div>
 </template>

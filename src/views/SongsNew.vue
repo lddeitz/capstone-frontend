@@ -46,53 +46,58 @@
             id="form-validation"
           >
             <div class="form-group">
+              Title:
               <input
                 type="text"
                 class="form-control"
                 id="title"
                 name="inputTitle"
-                placeholder="Title"
+                placeholder="What is this called?"
                 v-model="newSongTitle"
                 required
               />
             </div>
             <!-- / form-group -->
             <div class="form-group">
+              Description:
               <input
                 type="text"
                 class="form-control"
                 id="description"
                 name="inputDescription"
-                placeholder="Description"
+                placeholder="Any notes on things you're looking for feedback on?"
                 v-model="newSongDescription"
                 required
               />
             </div>
             <!-- / form-group -->
             <div class="form-group">
+              Keywords:
               <input
                 type="text"
                 class="form-control"
                 id="keywords"
                 name="inputKeywords"
-                placeholder="Keywords"
+                placeholder="Give a few words you'd use to describe this track."
                 v-model="newSongKeywords"
               />
             </div>
             <!-- / form-group -->
             <div class="form-group">
+              Embed URL:
               <textarea
                 id="url"
                 class="form-control"
                 name="embedURL"
                 rows="5"
-                placeholder="Embed URL"
+                placeholder="Grab the embedded URL from the source of your choosing."
                 v-model="newSongUrl"
                 required
               ></textarea>
             </div>
             <!-- / form-group -->
             <div class="form-group">
+              Artwork:
               <input
                 type="file"
                 class="form-control"

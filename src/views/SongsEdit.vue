@@ -1,12 +1,20 @@
 <template>
   <div class="songs-edit">
-    <h2>Edit Your Song</h2>
+    <!-- <h2>Edit Your Song</h2> -->
+    <div class="container">
+      <div class="spacer-2x">&nbsp;</div>
+      <h2 class="section-title text-center mb-10">EDIT</h2>
+      <div class="spacer-line border-primary">&nbsp;</div>
+      <div class="spacer-2x">&nbsp;</div>
+    </div>
+    <!-- / container -->
+
     <div class="edit-form">
-      <div class="container">
+      <!-- <div class="container">
         <form v-on:submit.prevent="editSong()">
-          <!-- <ul>
+          <ul>
               <li class="text-danger" v-for="error in errors">{{ error }}</li>
-            </ul> -->
+            </ul>
 
           Title:<input type="text" v-model="song.title" /><br />
 
@@ -21,6 +29,88 @@
 
           <input type="submit" class="btn btn-primary" value="Update" /><br />
         </form>
+      </div> -->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <p class="lead mt-3 mb-3"></p>
+            <form
+              class="validation-inner"
+              v-on:submit.prevent="editSong()"
+              id="form-validation"
+            >
+              <div class="form-group">
+                Title:
+                <input
+                  type="text"
+                  class="form-control"
+                  id="title"
+                  name="inputTitle"
+                  placeholder="Title"
+                  v-model="song.title"
+                  required
+                />
+              </div>
+              <!-- / form-group -->
+              <div class="form-group">
+                Description:
+                <input
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  name="inputDescription"
+                  placeholder="Description"
+                  v-model="song.description"
+                  required
+                />
+              </div>
+              <!-- / form-group -->
+              <div class="form-group">
+                Keywords:
+                <input
+                  type="text"
+                  class="form-control"
+                  id="keywords"
+                  name="inputKeywords"
+                  placeholder="Keywords"
+                  v-model="song.keywords"
+                />
+              </div>
+              <!-- / form-group -->
+              <div class="form-group">
+                Embed URL:
+                <textarea
+                  id="url"
+                  class="form-control"
+                  name="embedURL"
+                  rows="5"
+                  placeholder="Embed URL"
+                  v-model="song.url"
+                  required
+                ></textarea>
+              </div>
+              <!-- / form-group -->
+              <div class="form-group">
+                Artwork:
+                <input
+                  type="file"
+                  class="form-control"
+                  id="artwork"
+                  name="inputArtwork"
+                  placeholder="Artwork"
+                  v-on:change="setFile($event)"
+                  ref="fileInput"
+                />
+              </div>
+              <!-- / form-group -->
+              <button type="submit" class="btn btn-primary pill m-1">
+                Update
+              </button>
+            </form>
+          </div>
+          <!-- / col-sm-6 -->
+        </div>
       </div>
 
       <div class="delete-song">

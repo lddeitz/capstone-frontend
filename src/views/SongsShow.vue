@@ -6,6 +6,7 @@
         <br />
         <img :src="song.img_url" alt="album art" /><br />
         <strong>Details:</strong>
+
         <p>{{ song.description }}</p>
         <br />
         <strong>Keywords:</strong>
@@ -16,10 +17,6 @@
         <div class="song-embed">
           <span v-html="song.url"></span>
         </div>
-
-        <!-- <div class="song-embed">
-          {{ song.url }}
-        </div> -->
 
         <!--prismic.io-->
         <!-- <div>

@@ -7,18 +7,16 @@
         v-if="user.profile_picture"
         :src="user.profile_picture"
         :alt="user.name"
-        class="ppic"
         width="200"
         height="200"
       />
-      <img
+      <!-- <img
         v-if="!user.profile_picture"
         :src="'../default-photo.png'"
         :alt="user.name"
-        class="ppic"
         width="200"
         height="200"
-      />
+      /> -->
     </div>
 
     <div class="song-info">
