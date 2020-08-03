@@ -1,22 +1,117 @@
 <template>
   <div class="songs-new">
-    <h2>Submit a Song</h2>
+    <!-- <h2>Submit a Song</h2> -->
+    <div class="container">
+      <div class="spacer-2x">&nbsp;</div>
+      <h2 class="section-title text-center mb-10">UPLOAD A SONG</h2>
+      <div class="spacer-line border-primary">&nbsp;</div>
+      <div class="spacer-2x">&nbsp;</div>
+    </div>
+    <!-- / container -->
 
-    <form v-on:submit.prevent="createSong()">
+    <!-- <div class="container">
+      <center>
+        <form v-on:submit.prevent="createSong()">
+          Title: <input type="text" v-model="newSongTitle" /><br />
 
-        Title: <input type="text" v-model="newSongTitle"><br>
+          Description: <input type="text" v-model="newSongDescription" /><br />
 
-        Description: <input type="text" v-model="newSongDescription"><br>
+          Keywords: <input type="text" v-model="newSongKeywords" /><br />
 
-        Keywords: <input type="text" v-model="newSongKeywords"><br>
+          Embed Link: <input type="text" v-model="newSongUrl" /><br />
 
-        Embed Link: <input type="text" v-model="newSongUrl"><br>
+          Artwork:
+          <input
+            type="file"
+            v-on:change="setFile($event)"
+            ref="fileInput"
+          /><br />
 
-        Artwork: <input type="file" v-on:change="setFile($event)" ref="fileInput">
+          <input
+            type="submit"
+            class="btn btn-primary pill m-1"
+            value="Submit"
+          />
+        </form>
+      </center>
+    </div> -->
 
-    <input type="submit" class="btn btn-primary" value="Submit">
-
-    </form>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <p class="lead mt-3 mb-3"></p>
+          <form
+            class="validation-inner"
+            v-on:submit.prevent="createSong()"
+            id="form-validation"
+          >
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                name="inputTitle"
+                placeholder="Title"
+                v-model="newSongTitle"
+                required
+              />
+            </div>
+            <!-- / form-group -->
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="description"
+                name="inputDescription"
+                placeholder="Description"
+                v-model="newSongDescription"
+                required
+              />
+            </div>
+            <!-- / form-group -->
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                id="keywords"
+                name="inputKeywords"
+                placeholder="Keywords"
+                v-model="newSongKeywords"
+              />
+            </div>
+            <!-- / form-group -->
+            <div class="form-group">
+              <textarea
+                id="url"
+                class="form-control"
+                name="embedURL"
+                rows="5"
+                placeholder="Embed URL"
+                v-model="newSongUrl"
+                required
+              ></textarea>
+            </div>
+            <!-- / form-group -->
+            <div class="form-group">
+              <input
+                type="file"
+                class="form-control"
+                id="artwork"
+                name="inputArtwork"
+                placeholder="Artwork"
+                v-on:change="setFile($event)"
+                ref="fileInput"
+              />
+            </div>
+            <!-- / form-group -->
+            <button type="submit" class="btn btn-primary pill m-1">
+              Upload
+            </button>
+          </form>
+        </div>
+        <!-- / col-sm-6 -->
+      </div>
+    </div>
   </div>
 </template>
 
@@ -32,7 +127,7 @@ export default {
       newSongKeywords: "",
       newSongUrl: "",
       // newSongImgUrl: "",
-      imageFile: ""
+      imageFile: "",
       // user_id: localStorage.getItem("user_id"),
       // song_id: localStorage.getItem("id")
     };
@@ -48,11 +143,11 @@ export default {
       formData.append("image_file", this.imageFile);
       axios
         .post("/api/songs", formData)
-        .then(response => {
+        .then((response) => {
           console.log("Success", response.data);
           this.$router.push(`/songs/${response.data.id}`);
         })
-        .catch(error => {
+        .catch((error) => {
           this.errors = error.response.data.errors;
         });
     },
@@ -60,11 +155,7 @@ export default {
       if (event.target.files.length > 0) {
         this.imageFile = event.target.files[0];
       }
-    }
-  }
+    },
+  },
 };
 </script>
-
-
-
-

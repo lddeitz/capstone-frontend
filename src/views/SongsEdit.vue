@@ -1,31 +1,34 @@
 <template>
   <div class="songs-edit">
     <h2>Edit Your Song</h2>
-      <div class="edit-form">
-        <form v-on:submit.prevent="editSong()">  
-
+    <div class="edit-form">
+      <div class="container">
+        <form v-on:submit.prevent="editSong()">
           <!-- <ul>
-            <li class="text-danger" v-for="error in errors">{{ error }}</li>
-          </ul> -->
+              <li class="text-danger" v-for="error in errors">{{ error }}</li>
+            </ul> -->
 
-          Title:<input type="text" v-model="song.title"><br>
+          Title:<input type="text" v-model="song.title" /><br />
 
-          Description:<input type="text" v-model="song.description"><br>
+          Description:<input type="text" v-model="song.description" /><br />
 
-          Keywords:<input type="text" v-model="song.keywords"><br>
+          Keywords:<input type="text" v-model="song.keywords" /><br />
 
-          Embed Link:<input type="text" v-model="song.url"><br>
+          Embed Link:<input type="text" v-model="song.url" /><br />
 
-          Artwork: <input type="file" v-on:change="setFile($event)" ref="fileInput">
+          Artwork:
+          <input type="file" v-on:change="setFile($event)" ref="fileInput" />
 
-          <input type="submit" class="btn btn-primary" value="Update"><br>
-
+          <input type="submit" class="btn btn-primary" value="Update" /><br />
         </form>
       </div>
 
-    <!-- <div class="delete-song">
-      <button v-on:click="deleteSong()">Delete Song</button>
-    </div> -->
+      <div class="delete-song">
+        <button class="btn btn-primary pill m-1" v-on:click="deleteSong()">
+          Delete Song
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -40,12 +43,12 @@ export default {
       title: "",
       description: "",
       keywords: "",
-      url: ""
+      url: "",
       // imageFile: ""
     };
   },
   created: function() {
-    axios.get(`/api/songs/${this.$route.params.id}`).then(response => {
+    axios.get(`/api/songs/${this.$route.params.id}`).then((response) => {
       // console.log(response.data);
       // this.song = response.data;
       // console.log(this.song);
@@ -72,13 +75,13 @@ export default {
       }
       axios
         .patch(`/api/songs/${this.song.id}`, formData)
-        .then(response => {
+        .then((response) => {
           this.$router.push(`/users/${response.data.user_id}`);
         })
-        .catch(error => {
+        .catch((error) => {
           this.errors = error.response.data.errors;
         });
-    }
+    },
     // deleteSong: function() {
     //   if (confirm("Are you sure you want to delete your song?")) {
     //     axios.delete(`/api/songs/${this.song.id}`).then(response => {
@@ -87,9 +90,8 @@ export default {
     //     });
     //   }
     // }
-  }
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

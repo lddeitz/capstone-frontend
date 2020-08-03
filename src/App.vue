@@ -1,46 +1,79 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/signup">Signup</router-link> | 
-      <div v-if="isLoggedIn()">
-        <router-link to="/logout">Logout</router-link> |
+    <header class="bg-white pt-10 bg-img bg-fixed">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand" href="/index.html">
+            <img src="/assets/images/logo.png" alt=""
+          /></a>
 
-        <router-link :to="`/users/${getUserId()}/`">My Profile</router-link> | 
+          <button
+            class="navbar-toggler collapsed"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbar-toggle"
+            aria-controls="navbar-toggle"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+            <span class="sr-only">Toggle navigation</span></button
+          ><!-- / navbar-toggler -->
 
-        <router-link to="/songs/new">New Song</router-link> | 
-      </div>
+          <!--nav start-->
+          <div class="collapse navbar-collapse" id="navbar-toggle">
+            <ul class="navbar-nav ml-auto">
+              <div v-if="isLoggedIn()">
+                <li class="nav-item">
+                  <router-link
+                    class="nav-link smooth-scroll"
+                    :to="`/users/${getUserId()}/`"
+                    >MY PROFILE</router-link
+                  >
+                </li>
 
-      <div v-if="!isLoggedIn()">
-        <router-link to="/login">Login</router-link> |
-      </div>
-    </div>
-    <router-view/>
+                <li class="nav-item">
+                  <router-link class="nav-link smooth-scroll" to="/songs/new"
+                    >NEW SONG</router-link
+                  >
+                </li>
+
+                <li class="nav-item">
+                  <router-link class="nav-link smooth-scroll" to="/logout"
+                    >LOGOUT</router-link
+                  >
+                </li>
+              </div>
+
+              <div v-if="!isLoggedIn()">
+                <li class="nav-item">
+                  <router-link class="nav-link smooth-scroll" to="/signup"
+                    >SIGNUP</router-link
+                  >
+                </li>
+                <li class="nav-item">
+                  <router-link class="nav-link smooth-scroll" to="/login"
+                    >LOGIN</router-link
+                  >
+                </li>
+              </div>
+            </ul>
+          </div>
+          <!--nav end-->
+
+          <!-- / navbar-collapse -->
+        </div>
+        <!-- / container -->
+      </nav>
+    </header>
+
+    <router-view />
+    <!--Start of Footer-->
+    <!--End of Footer-->
   </div>
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
 
 <script>
 export default {
@@ -54,7 +87,7 @@ export default {
     },
     getUserId: function() {
       return localStorage.getItem("user_id");
-    }
-  }
+    },
+  },
 };
 </script>
