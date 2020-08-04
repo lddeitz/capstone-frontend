@@ -32,7 +32,7 @@
       </div> -->
 
       <div class="container">
-        <div class="row">
+        <div class="row mb-30">
           <div class="col-sm-6">
             <p class="lead mt-3 mb-3"></p>
             <form
@@ -55,15 +55,16 @@
               <!-- / form-group -->
               <div class="form-group">
                 Description:
-                <input
+                <textarea
                   type="text"
                   class="form-control"
                   id="description"
+                  rows="5"
                   name="inputDescription"
                   placeholder="Description"
                   v-model="song.description"
                   required
-                />
+                /></textarea>
               </div>
               <!-- / form-group -->
               <div class="form-group">
@@ -84,24 +85,30 @@
                   id="url"
                   class="form-control"
                   name="embedURL"
-                  rows="5"
+                  rows="1"
                   placeholder="Embed URL"
                   v-model="song.url"
                   required
                 ></textarea>
               </div>
               <!-- / form-group -->
-              <div class="form-group">
-                Artwork:
-                <input
-                  type="file"
-                  class="form-control"
-                  id="artwork"
-                  name="inputArtwork"
-                  placeholder="Artwork"
-                  v-on:change="setFile($event)"
-                  ref="fileInput"
-                />
+              <div class="row mb-30">
+                <div class="col-6">
+                  <center>
+                    <div class="form-group">
+                      Artwork:
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="artwork"
+                        name="inputArtwork"
+                        placeholder="Artwork"
+                        v-on:change="setFile($event)"
+                        ref="fileInput"
+                      />
+                    </div>
+                  </center>
+                </div>
               </div>
               <!-- / form-group -->
               <button type="submit" class="btn btn-primary pill m-1">
@@ -112,12 +119,19 @@
           <!-- / col-sm-6 -->
         </div>
       </div>
+      <div class="spacer">&nbsp;</div>
+      <div class="spacer">&nbsp;</div>
 
-      <div class="delete-song">
-        <button class="btn btn-primary pill m-1" v-on:click="deleteSong()">
-          Delete Song
-        </button>
-      </div>
+      <center>
+        <div class="delete-song">
+          <button
+            class="btn btn-danger-gradient m-10"
+            v-on:click="deleteSong()"
+          >
+            Delete Song
+          </button>
+        </div>
+      </center>
     </div>
   </div>
 </template>

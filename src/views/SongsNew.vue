@@ -3,7 +3,7 @@
     <!-- <h2>Submit a Song</h2> -->
     <div class="container">
       <div class="spacer-2x">&nbsp;</div>
-      <h2 class="section-title text-center mb-10">UPLOAD A SONG</h2>
+      <h2 class="section-title text-center mb-10">UPLOAD A TRACK</h2>
       <div class="spacer-line border-primary">&nbsp;</div>
       <div class="spacer-2x">&nbsp;</div>
     </div>
@@ -52,7 +52,7 @@
                 class="form-control"
                 id="title"
                 name="inputTitle"
-                placeholder="What is this called?"
+                placeholder="Feel free to specify a version!"
                 v-model="newSongTitle"
                 required
               />
@@ -60,15 +60,16 @@
             <!-- / form-group -->
             <div class="form-group">
               Description:
-              <input
+              <textarea
                 type="text"
                 class="form-control"
                 id="description"
+                rows="5"
                 name="inputDescription"
                 placeholder="Any notes on things you're looking for feedback on?"
                 v-model="newSongDescription"
                 required
-              />
+              /></textarea>
             </div>
             <!-- / form-group -->
             <div class="form-group">
@@ -89,25 +90,30 @@
                 id="url"
                 class="form-control"
                 name="embedURL"
-                rows="5"
+                rows="2"
                 placeholder="Grab the embedded URL from the source of your choosing."
                 v-model="newSongUrl"
                 required
               ></textarea>
             </div>
             <!-- / form-group -->
-            <div class="form-group">
-              Artwork:
-              <input
-                type="file"
-                class="form-control"
-                id="artwork"
-                name="inputArtwork"
-                placeholder="Artwork"
-                v-on:change="setFile($event)"
-                ref="fileInput"
-              />
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  Artwork:
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="artwork"
+                    name="inputArtwork"
+                    placeholder="Artwork"
+                    v-on:change="setFile($event)"
+                    ref="fileInput"
+                  />
+                </div>
+              </div>
             </div>
+             <div class="spacer-2x">&nbsp;</div>
             <!-- / form-group -->
             <button type="submit" class="btn btn-primary pill m-1">
               Upload

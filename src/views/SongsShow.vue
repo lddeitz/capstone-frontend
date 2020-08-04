@@ -2,20 +2,55 @@
   <div class="songs-show">
     <div v-if="song.title">
       <div class="song-info">
-        <h2>{{ song.title }}</h2>
         <br />
-        <img :src="song.img_url" alt="album art" /><br />
-        <strong>Details:</strong>
+        <div class="row mb-30">
+          <div class="col-6">
+            <center>
+              <div class="container">
+                <div class="spacer-2x">&nbsp;</div>
+                <h2 class="section-title text-center mb-10">
+                  {{ song.title }}
+                </h2>
+                <div class="spacer-line border-primary">&nbsp;</div>
+                <div class="spacer-2x">&nbsp;</div>
+              </div>
+              <router-link :to="`/songs/${song.id}/edit`">
+                <img
+                  :src="song.img_url"
+                  class="figure-img img-fluid rounded w-50 raised move"
+                  alt="album art"
+                /><br />
+              </router-link>
+            </center>
+            <div class="spacer-2x">&nbsp;</div>
+            <center>
+              <router-link
+                class="btn btn-primary pill m-1"
+                :to="`/songs/${song.id}/edit`"
+                >EDIT SONG</router-link
+              >
+              <!-- <button
+                class="btn btn-danger-gradient m-10"
+                v-on:click="deleteSong()"
+              >
+                DELETE SONG
+              </button> -->
+            </center>
+          </div>
+        </div>
+        <div class="col-6">
+          <strong>Details:</strong>
 
-        <p>{{ song.description }}</p>
-        <br />
-        <strong>Keywords:</strong>
-        <p>{{ song.keywords }}</p>
-        <br />
+          <p>{{ song.description }}</p>
+          <br />
+          <strong>Keywords:</strong>
+          <p>{{ song.keywords }}</p>
+          <br />
 
-        <!--Track Embed-->
-        <div class="song-embed">
-          <span v-html="song.url"></span>
+          <!--Track Embed-->
+          <div class="song-embed">
+            <span v-html="song.url"></span>
+          </div>
         </div>
 
         <!--prismic.io-->
@@ -24,30 +59,38 @@
         </div> -->
 
         <!--New Comment-->
-        <h2>New Comment</h2>
-        <form v-on:submit.prevent="createComment(song)">
-          Notes:<textarea type="text" v-model="newCommentNotes"></textarea
-          ><br />
-          <div v-if="!$parent.isLoggedIn()">
-            Author:<input type="text" v-model="newCommentAuthor" /><br />
-          </div>
-          Song Timestamp:<input type="text" v-model="newSongTimestamp" /><br />
-          <div v-for="tag in tags">
+        <div class="container">
+          <h2>New Comment</h2>
+          <form v-on:submit.prevent="createComment(song)">
+            Notes:<textarea type="text" v-model="newCommentNotes"></textarea
+            ><br />
+            <small
+              >{{ 280 - newCommentNotes.length }} characters remaining.</small
+            ><br />
+            <div v-if="!$parent.isLoggedIn()">
+              Author:<input type="text" v-model="newCommentAuthor" /><br />
+            </div>
+            Song Timestamp:<input
+              type="text"
+              v-model="newSongTimestamp"
+            /><br />
+            <div v-for="tag in tags">
+              <input
+                :value="tag.id"
+                type="checkbox"
+                :id="tag.id"
+                v-model="tagIds"
+              />
+              <label :for="tag.id">{{ tag.name }}</label>
+            </div>
+            {{ tagIds }}
             <input
-              :value="tag.id"
-              type="checkbox"
-              :id="tag.id"
-              v-model="tagIds"
+              type="submit"
+              class="btn btn-primary pill m-1"
+              value="Comment"
             />
-            <label :for="tag.id">{{ tag.name }}</label>
-          </div>
-          {{ tagIds }}
-          <input
-            type="submit"
-            class="btn btn-primary pill m-1"
-            value="Comment"
-          />
-        </form>
+          </form>
+        </div>
 
         <!--All Comments-->
         <div class="total-comments">
@@ -101,12 +144,6 @@
             </div>
           </div>
         </div>
-
-        <!--Song Delete (for uploader only)-->
-        <div class="delete-song">
-          <router-link :to="`/songs/${song.id}/edit`">Edit Song</router-link>
-          <button v-on:click="deleteSong()">Delete Song</button>
-        </div>
       </div>
     </div>
   </div>
@@ -114,8 +151,10 @@
 
 <script>
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       // fields: {
@@ -134,6 +173,7 @@ export default {
       tags: [],
       selectedTagIds: [],
       currentComment: {},
+      commentTagFilter: "",
     };
   },
   created: function() {

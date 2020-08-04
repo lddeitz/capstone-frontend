@@ -13,29 +13,22 @@
       <form v-on:submit.prevent="editUser()">
         <label for="artist_name">Artist Name:</label>
         <input type="text" v-model="user.artist_name" /><br />
-
         <label for="first_name">First Name:</label>
         <input type="text" v-model="user.first_name" /><br />
-
         <label for="last_name">Last Name:</label>
         <input type="text" v-model="user.last_name" /><br />
-
         <label for="bio">Bio:</label>
         <input type="text" v-model="user.bio" /><br />
-
         <label for="email">Email:</label>
         <input type="text" v-model="user.email" /><br />
-
         <label for="email">Password:</label>
         <input type="text" v-model="user.password" /><br />
-
         Update Profile Picture
         <input
           type="file"
           v-on:change="setFile($event)"
           ref="fileInput"
         /><br />
-
         <input
           type="submit"
           class="btn btn-primary pill m-1"
@@ -45,8 +38,8 @@
     </div> -->
 
     <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
+      <div class="row mb-30">
+        <div class="col-6">
           <p class="lead mt-3 mb-3"></p>
           <form
             class="validation-inner"
@@ -65,29 +58,35 @@
               />
             </div>
             <!-- / form-group -->
-            <div class="form-group">
-              First Name:
-              <input
-                type="text"
-                class="form-control"
-                id="firstname"
-                name="inputFirstName"
-                placeholder="First Name"
-                v-model="user.first_name"
-                required
-              />
-            </div>
-            <!-- / form-group -->
-            <div class="form-group">
-              Last Name:
-              <input
-                type="text"
-                class="form-control"
-                id="lastname"
-                name="inputLastName"
-                placeholder="Last Name"
-                v-model="user.last_name"
-              />
+            <div class="row mb-30">
+              <div class="col-6">
+                <div class="form-group">
+                  First Name:
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="firstname"
+                    name="inputFirstName"
+                    placeholder="First Name"
+                    v-model="user.first_name"
+                    required
+                  />
+                </div>
+              </div>
+              <!-- / form-group -->
+              <div class="col-6">
+                <div class="form-group">
+                  Last Name:
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lastname"
+                    name="inputLastName"
+                    placeholder="Last Name"
+                    v-model="user.last_name"
+                  />
+                </div>
+              </div>
             </div>
             <!-- / form-group -->
             <div class="form-group">
@@ -127,39 +126,47 @@
               />
             </div>
             <!-- / form-group -->
-            <div class="form-group">
-              Profile Picture:
-              <input
-                type="file"
-                class="form-control"
-                id="artwork"
-                name="inputProfilePicture"
-                placeholder="ProfilePicture"
-                v-on:change="setFile($event)"
-                ref="fileInput"
-              />
-            </div>
-            <!-- / form-group -->
             <button type="submit" class="btn btn-primary pill m-1">
               Update
             </button>
           </form>
         </div>
         <!-- / col-sm-6 -->
+        <div class="col-6">
+          <center>
+            <img
+              class="figure-img img-fluid circle w-50 raised move"
+              :src="user.profile_picture"
+              alt="profile_picture"
+            />
+          </center>
+          <div class="form-group">
+            <center>
+              <input
+                type="file"
+                id="artwork"
+                name="inputProfilePicture"
+                placeholder="ProfilePicture"
+                v-on:change="setFile($event)"
+                ref="fileInput"
+              />
+            </center>
+          </div>
+          <!-- / form-group -->
+        </div>
       </div>
     </div>
+    <div class="spacer">&nbsp;</div>
 
-    <img
-      class="profile picture"
-      :src="user.profile_picture"
-      alt="profile_picture"
-    />
+    <div class="spacer">&nbsp;</div>
 
-    <div class="delete-account">
-      <button class="btn btn-primary pill m-1" v-on:click="deleteUser()">
-        Delete Account
-      </button>
-    </div>
+    <center>
+      <div class="delete-account">
+        <button class="btn btn-danger-gradient m-10" v-on:click="deleteUser()">
+          DELETE ACCOUNT
+        </button>
+      </div>
+    </center>
   </div>
 </template>
 
@@ -193,7 +200,6 @@ export default {
     },
     editUser: function() {
       var formData = new FormData();
-
       formData.append("artist_name", this.user.artist_name);
       formData.append("first_name", this.user.first_name);
       formData.append("last_name", this.user.last_name);

@@ -41,22 +41,22 @@
             </ul>
             <div class="form-group">
               <input
-                type="email"
-                class="form-control"
-                name="emailRegister"
-                placeholder="Email"
-                v-model="email"
-              />
-            </div>
-            <!-- / form-group -->
-            <div class="form-group">
-              <input
                 type="text"
                 class="form-control"
                 name="usernameRegister"
                 placeholder="Username"
                 v-model="user.artist_name"
                 required
+              />
+            </div>
+            <!-- / form-group -->
+            <div class="form-group">
+              <input
+                type="email"
+                class="form-control"
+                name="emailRegister"
+                placeholder="Email"
+                v-model="email"
               />
             </div>
             <!-- / form-group -->
@@ -70,6 +70,12 @@
                 v-model="password"
               />
             </div>
+            <!-- <small class="text-danger" v-if="password.length < 6"
+              >Must be at least 6 characters.</small
+            ><br />
+            <small class="text-danger" v-if="password.length > 20"
+              >Cannot exceed 20 characters.</small
+            ><br /> -->
             <!-- / form-group -->
             <div class="form-group">
               <input
@@ -81,6 +87,9 @@
                 required
               />
             </div>
+            <small class="text-danger" v-if="passwordConfirmation != password"
+              >Must match password.</small
+            >
             <!-- / form-group -->
 
             <div class="row v-center">
