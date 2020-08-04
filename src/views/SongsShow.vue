@@ -24,6 +24,17 @@
             </center>
             <div class="spacer-2x">&nbsp;</div>
             <center>
+              <!--Button for Modal-->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-toggle="modal"
+                data-target="#commentModal"
+              >
+                Comment
+              </button>
+              <!--/Button for Modal-->
+
               <router-link
                 class="btn btn-primary pill m-1"
                 :to="`/songs/${song.id}/edit`"
@@ -37,19 +48,70 @@
               </button> -->
             </center>
           </div>
-        </div>
-        <div class="col-6">
-          <strong>Details:</strong>
+          <div class="col-6">
+            <div class="container">
+              <div class="spacer-2x">&nbsp;</div>
+              <h2 class="section-title text-center mb-10">
+                LISTEN
+              </h2>
+              <div class="spacer-line border-primary">&nbsp;</div>
+              <div class="spacer-2x">&nbsp;</div>
+            </div>
+            <!-- <strong>Description:</strong>
 
-          <p>{{ song.description }}</p>
-          <br />
-          <strong>Keywords:</strong>
-          <p>{{ song.keywords }}</p>
-          <br />
+            <p>{{ song.description }}</p>
+            <br />
+            <strong>Keywords:</strong>
+            <p>{{ song.keywords }}</p>
+            <br /> -->
+            <div class="col-md-10">
+              <!-- <div class="card"> -->
+              <div class="card-body">
+                <div class="promo-left mb-30">
+                  <div class="promo-container pl-60">
+                    <i
+                      class="ti-comment promo-icon fs-40 d-block mb-25 left-30 text-success"
+                    ></i>
+                    <h6 class="box-title mb-15 text-hover success-hover">
+                      DESCRIPTION
+                    </h6>
+                    <p class="card-text mt-15 mb-0">"{{ song.description }}"</p>
+                  </div>
+                </div>
 
-          <!--Track Embed-->
-          <div class="song-embed">
-            <span v-html="song.url"></span>
+                <!-- <div class="promo-left mb-30">
+                    <div class="promo-container pl-60">
+                      <i
+                        class="fas fa-star promo-icon fs-40 d-block mb-25 left-30 text-info"
+                      ></i>
+                      <h6 class="box-title mb-15 text-hover info-hover">
+                        KEYWORDS
+                      </h6>
+                      <p class="card-text mt-15 mb-0">{{ song.keywords }}</p>
+                    </div>
+                  </div> -->
+
+                <div class="promo-left">
+                  <div class="promo-container pl-60">
+                    <i
+                      class="ti-world promo-icon fs-40 d-block mb-25 left-30 text-danger"
+                    ></i>
+                    <h6 class="box-title mb-15 text-hover danger-hover">
+                      AUDIO
+                    </h6>
+                    <!--Track Embed-->
+                    <div class="song-embed">
+                      <span v-html="song.url"></span>
+                    </div>
+                  </div>
+                </div>
+                <!-- / promo-left -->
+              </div>
+              <!-- / card-body -->
+              <!-- </div> -->
+              <!-- / card -->
+            </div>
+            <!-- / column -->
           </div>
         </div>
 
@@ -59,7 +121,7 @@
         </div> -->
 
         <!--New Comment-->
-        <div class="container">
+        <!-- <div class="container">
           <h2>New Comment</h2>
           <form v-on:submit.prevent="createComment(song)">
             Notes:<textarea type="text" v-model="newCommentNotes"></textarea
@@ -90,7 +152,7 @@
               value="Comment"
             />
           </form>
-        </div>
+        </div> -->
 
         <!--All Comments-->
         <div class="total-comments">

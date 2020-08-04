@@ -1,0 +1,114 @@
+<!--Comment Modal-->
+        <div
+          class="modal fade modal-left modal-left-example modal-register"
+          id="commentModal"
+          tabindex="-1"
+          role="dialog"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="side-modal-wrapper">
+                <div class="vertical-align">
+                  <div class="table-cell">
+                    <div class="modal-body">
+                      <h6 class="mb-20">Leave a Note</h6>
+                      <p class="mb-20 fs-14">
+                        Share feedback on any part of this song!
+                      </p>
+                      <form
+                        v-on:submit.prevent="createComment(song)"
+                        class="validation-inner"
+                        id="feedback-form"
+                      >
+                        <div class="form-group">
+                          <textarea
+                            type="text"
+                            class="form-control"
+                            name="newCommentNotes"
+                            v-model="newCommentNotes"
+                            placeholder="Notes"
+                          ></textarea>
+                          <small
+                            >{{ 280 - newCommentNotes.length }} characters
+                            remaining.</small
+                          >
+                        </div>
+                        <!-- / form-group -->
+                        <div class="form-group">
+                          <div v-if="!$parent.isLoggedIn()">
+                            <input
+                              type="text"
+                              class="form-control"
+                              name="newCommentAuthor"
+                              v-model="newCommentAuthor"
+                              placeholder="Name"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <!-- / form-group -->
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="newSongTimestamp"
+                            v-model="newSongTimestamp"
+                            placeholder="0:00 - 0:02"
+                          />
+                        </div>
+                        <!-- / form-group -->
+                        <div class="form-group">
+                          <div class="btn-group mr-20">
+                            <div
+                              class="checkbox checkbox-primary"
+                              v-for="tag in tags"
+                            >
+                              <!-- <label class="hidden"><input type="checkbox"></label> -->
+                              <input
+                                :id="tag.id"
+                                type="checkbox"
+                                :value="tag.id"
+                                v-model="tagIds"
+                                checked
+                              />
+                              <label :for="tag.id">
+                                {{ tag.name }}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- / form-group -->
+                        <button
+                          type="submit"
+                          class="btn btn-sm btn-primary mt-25"
+                        >
+                          Comment
+                        </button>
+                      </form>
+                      <!-- / login-form -->
+                    </div>
+                    <!-- / modal-body -->
+                  </div>
+                  <!-- / table-cell -->
+                </div>
+                <!-- / vertical-align -->
+              </div>
+              <!-- / side-modal-wrapper -->
+              <div class="modal-footer">
+                <div v-if="!isLoggedIn()">
+                  <span class="fs-14 text-left"
+                    >Already have an account?
+                    <router-link to="/login" class="fs-14"
+                      >Login Now</router-link
+                    ></span
+                  >
+                </div>
+              </div>
+              <!-- / modal-footer -->
+            </div>
+            <!-- / modal-content -->
+          </div>
+          <!-- / modal-dialog -->
+        </div>
+        <!-- / modal -->
+<!--/ End of Modal For Commenting-->
