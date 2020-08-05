@@ -147,7 +147,30 @@
 
 
 
-
+<!--Users Show Song Grid-->
+<section id="shop" class="lg bg-white pb-70">
+  <div class="container">
+      <div class="section-heading text-center">
+          <h2 class="mb-15">{{ user.artist_name }}'S TRACKS IN PROGRESS</h2>
+          <div class="spacer-line border-primary mb-20">&nbsp;</div>
+          <p class="w50 mb-70 m-x-auto"></p>
+      </div><!-- / section-heading -->
+      <div v-for="song in user.songs">
+        <h2 class="hidden">{{ song.title }}</h2>
+        <div class="row">
+            <div class="col-sm-6 col-md-3 mb-30">
+                <div class="product text-center">
+                    <div class="sale-badge top-right bg-black dark rounded right-15">
+                        <p class="mb-0 fs-10 fw-regular">{{ song.title }}</p>
+                    </div><!-- / sale-badge -->
+                    <img :src="song.img_url" alt="" class="mb-30 rounded raised">
+                    <p class="mb-0"><router-link :to="`/songs/${song.id}/`" class="card-title fs-18 fw-regular title-link">{{ song.keywords }}</router-link></p>
+                    <router-link class="btn btn-success m-1" :to="`/songs/${song.id}/`">VIEW</router-link>
+                  </div><!-- / product -->
+              </div><!-- / column -->
+         </div>
+      </div>
+</section>
 
 
 

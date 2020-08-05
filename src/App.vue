@@ -1,46 +1,9 @@
 <template>
   <div id="app">
-    <head>
-      <!-- Meta -->
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no"
-      />
-      <meta name="description" content="ERIKA - Bootstrap 4 UI & Components" />
-      <meta name="author" content="erikathemes.com" />
-      <!-- Favicon -->
-      <link rel="icon" href="assets/images/favicon.png" />
-      <!-- Site Title -->
-      <title>ERIKA - Bootstrap 4 UI & Components</title>
-      <!-- Bootstrap 4 core CSS -->
-      <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-      <!-- Custom Styles -->
-      <link href="assets/css/style.css" rel="stylesheet" />
-      <link href="assets/css/animate.css" rel="stylesheet" />
-      <link href="assets/css/owl.carousel.min.css" rel="stylesheet" />
-      <!-- Fonts -->
-      <link
-        href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet"
-      />
-      <link
-        href="assets/css/fontawesome-all.min.css"
-        rel="stylesheet"
-        type="text/css"
-      />
-      <link rel="stylesheet" href="assets/css/themify-icons.css" />
-    </head>
-
     <body>
       <header
         class="bg-white pt-10 bg-img bg-fixed"
-        style="background-image: url(assets/images/erika-header.jpg)"
+        style="background-image: url(/assets/images/erika-header.jpg)"
       >
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container">
@@ -66,44 +29,36 @@
             <!--nav start-->
             <div class="collapse navbar-collapse" id="navbar-toggle">
               <ul class="navbar-nav ml-auto">
-                <div v-if="isLoggedIn()">
-                  <div v-if="!isProfile()">
-                    <li class="nav-item">
-                      <router-link
-                        class="nav-link smooth-scroll"
-                        :to="`/users/${getUserId()}/`"
-                        >MY PROFILE</router-link
-                      >
-                    </li>
-                  </div>
+                <li class="nav-item">
+                  <router-link
+                    class="nav-link smooth-scroll"
+                    :to="`/users/${getUserId()}/`"
+                    >MY PROFILE</router-link
+                  >
+                </li>
 
-                  <li class="nav-item">
-                    <router-link class="nav-link smooth-scroll" to="/songs/new">
-                      <div v-if="!isNewSong()">
-                        NEW SONG
-                      </div>
-                    </router-link>
-                  </li>
+                <li class="nav-item">
+                  <router-link class="nav-link smooth-scroll" to="/songs/new">
+                    NEW SONG
+                  </router-link>
+                </li>
 
-                  <li class="nav-item">
-                    <router-link class="nav-link smooth-scroll" to="/logout"
-                      >LOGOUT</router-link
-                    >
-                  </li>
-                </div>
+                <li class="nav-item">
+                  <router-link class="nav-link smooth-scroll" to="/logout"
+                    >LOGOUT</router-link
+                  >
+                </li>
 
-                <div v-if="!isLoggedIn()">
-                  <li class="nav-item">
-                    <router-link class="nav-link smooth-scroll" to="/signup"
-                      >SIGNUP</router-link
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <router-link class="nav-link smooth-scroll" to="/login"
-                      >LOGIN</router-link
-                    >
-                  </li>
-                </div>
+                <li class="nav-item">
+                  <router-link class="nav-link smooth-scroll" to="/signup"
+                    >SIGNUP</router-link
+                  >
+                </li>
+                <li class="nav-item">
+                  <router-link class="nav-link smooth-scroll" to="/login"
+                    >LOGIN</router-link
+                  >
+                </li>
               </ul>
             </div>
             <!--nav end-->
@@ -115,19 +70,18 @@
       </header>
 
       <router-view />
-    </body>
-    <!--Start of Footer-->
-    <div class="spacer-2x">&nbsp;</div>
-    <footer class="dark bg-inverse">
-      <div class="container text-center">
-        <div class="row v-center">
-          <div class="col-lg-6 footer-left-area">
-            <p>
-              © 2020 <span class="fw-regular">SOUNDJEK</span>. All Rights
-              Reserved.
-            </p>
-          </div>
-          <!-- / footer-left-area
+      <!--Start of Footer-->
+      <div class="spacer-2x">&nbsp;</div>
+      <footer class="dark bg-inverse">
+        <div class="container text-center">
+          <div class="row v-center">
+            <div class="col-lg-6 footer-left-area">
+              <p>
+                © 2020 <span class="fw-regular">SOUNDJEK</span>. All Rights
+                Reserved.
+              </p>
+            </div>
+            <!-- / footer-left-area
           <div class="col-lg-6 footer-right-area">
             <p>
               Designed with
@@ -141,12 +95,13 @@
             </p>
           </div>
           <!-- / footer-right-area -->
+          </div>
+          <!-- / row -->
         </div>
-        <!-- / row -->
-      </div>
-      <!-- / container -->
-    </footer>
-    <!--End of Footer-->
+        <!-- / container -->
+      </footer>
+      <!--End of Footer-->
+    </body>
   </div>
 </template>
 

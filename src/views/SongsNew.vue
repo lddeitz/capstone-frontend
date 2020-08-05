@@ -37,8 +37,8 @@
     </div> -->
 
     <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
+      <!-- <div class="row"> -->
+        <!-- <div class="col-sm-6"> -->
           <p class="lead mt-3 mb-3"></p>
           <form
             class="validation-inner"
@@ -103,7 +103,7 @@
                   Artwork:
                   <input
                     type="file"
-                    class="form-control"
+                    
                     id="artwork"
                     name="inputArtwork"
                     placeholder="Artwork"
@@ -119,9 +119,9 @@
               Upload
             </button>
           </form>
-        </div>
+        <!-- </div> -->
         <!-- / col-sm-6 -->
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 </template>

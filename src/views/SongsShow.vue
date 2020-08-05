@@ -25,14 +25,14 @@
             <div class="spacer-2x">&nbsp;</div>
             <center>
               <!--Button for Modal-->
-              <button
+              <!-- <button
                 type="button"
                 class="btn btn-primary"
                 data-toggle="modal"
                 data-target="#commentModal"
               >
                 Comment
-              </button>
+              </button> -->
               <!--/Button for Modal-->
 
               <router-link
@@ -65,21 +65,25 @@
             <p>{{ song.keywords }}</p>
             <br /> -->
             <div class="col-md-10">
-              <!-- <div class="card"> -->
-              <div class="card-body">
-                <div class="promo-left mb-30">
-                  <div class="promo-container pl-60">
-                    <i
-                      class="ti-comment promo-icon fs-40 d-block mb-25 left-30 text-success"
-                    ></i>
-                    <h6 class="box-title mb-15 text-hover success-hover">
-                      DESCRIPTION
-                    </h6>
-                    <p class="card-text mt-15 mb-0">"{{ song.description }}"</p>
+              <div class="card">
+                <div class="card-body">
+                  <div class="promo-left mb-30">
+                    <div class="promo-container pl-60">
+                      <i
+                        class="ti-comment promo-icon fs-40 d-block mb-25 left-30 text-success"
+                      ></i>
+                      <h6 class="box-title mb-15 text-hover success-hover">
+                        DESCRIPTION
+                      </h6>
+                      <p class="card-text mt-15 mb-0">
+                        "{{ song.description }}"
+                      </p>
+                    </div>
                   </div>
                 </div>
+              </div>
 
-                <!-- <div class="promo-left mb-30">
+              <!-- <div class="promo-left mb-30">
                     <div class="promo-container pl-60">
                       <i
                         class="fas fa-star promo-icon fs-40 d-block mb-25 left-30 text-info"
@@ -90,18 +94,20 @@
                       <p class="card-text mt-15 mb-0">{{ song.keywords }}</p>
                     </div>
                   </div> -->
-
-                <div class="promo-left">
-                  <div class="promo-container pl-60">
-                    <i
-                      class="ti-world promo-icon fs-40 d-block mb-25 left-30 text-danger"
-                    ></i>
-                    <h6 class="box-title mb-15 text-hover danger-hover">
-                      AUDIO
-                    </h6>
-                    <!--Track Embed-->
-                    <div class="song-embed">
-                      <span v-html="song.url"></span>
+              <div class="card">
+                <div class="card-body">
+                  <div class="promo-left">
+                    <div class="promo-container pl-60">
+                      <i
+                        class="ti-world promo-icon fs-40 d-block mb-25 left-30 text-danger"
+                      ></i>
+                      <h6 class="box-title mb-15 text-hover danger-hover">
+                        AUDIO
+                      </h6>
+                      <!--Track Embed-->
+                      <div class="song-embed">
+                        <span v-html="song.url"></span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -120,8 +126,8 @@
         <prismic-embed :field="fields.songEmbed"/>
         </div> -->
 
-        <!--New Comment-->
-        <!-- <div class="container">
+        <!-- New Comment-->
+        <div class="container">
           <h2>New Comment</h2>
           <form v-on:submit.prevent="createComment(song)">
             Notes:<textarea type="text" v-model="newCommentNotes"></textarea
@@ -152,10 +158,11 @@
               value="Comment"
             />
           </form>
-        </div> -->
+        </div>
 
         <!--All Comments-->
-        <div class="total-comments">
+
+        <!-- <div class="total-comments">
           <div v-for="comment in song.comments">
             <strong
               ><p>{{ comment.author }}</p></strong
@@ -167,9 +174,11 @@
               <button v-on:click="showCommentEditForm(comment)">Edit</button>
               <button v-on:click="deleteComment(comment)">Delete</button>
             </div>
-            <br />
-            <!--Edit Comment Tag Box-->
-            <div v-if="comment == currentComment">
+            <br /> -->
+
+        <!--Edit Comment Tag Box-->
+
+        <!-- <div v-if="comment == currentComment">
               <form v-on:submit.prevent="editComment(currentComment)">
                 Notes:<textarea
                   type="textarea"
@@ -205,7 +214,7 @@
               </form>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

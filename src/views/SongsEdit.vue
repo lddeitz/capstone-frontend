@@ -32,8 +32,8 @@
       </div> -->
 
       <div class="container">
-        <div class="row mb-30">
-          <div class="col-sm-6">
+        <!-- <div class="row mb-30"> -->
+          <!-- <div class="col-sm-6"> -->
             <p class="lead mt-3 mb-3"></p>
             <form
               class="validation-inner"
@@ -92,14 +92,13 @@
                 ></textarea>
               </div>
               <!-- / form-group -->
-              <div class="row mb-30">
-                <div class="col-6">
-                  <center>
+              <!-- <div class="row mb-30"> -->
+                <!-- <div class="col-6"> -->
                     <div class="form-group">
                       Artwork:
                       <input
                         type="file"
-                        class="form-control"
+                        
                         id="artwork"
                         name="inputArtwork"
                         placeholder="Artwork"
@@ -107,17 +106,16 @@
                         ref="fileInput"
                       />
                     </div>
-                  </center>
-                </div>
-              </div>
+                <!-- </div> -->
+              <!-- </div> -->
               <!-- / form-group -->
               <button type="submit" class="btn btn-primary pill m-1">
                 Update
               </button>
             </form>
-          </div>
+          <!-- </div> -->
           <!-- / col-sm-6 -->
-        </div>
+        <!-- </div> -->
       </div>
       <div class="spacer">&nbsp;</div>
       <div class="spacer">&nbsp;</div>
