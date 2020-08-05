@@ -1,94 +1,115 @@
 <template>
   <div class="users-show">
-    <div class="artist-info">
-      <!-- <h2>{{ user.artist_name }}</h2> -->
+    <body>
+      <!-- <div class="artist-info">
+        <h2>{{ user.artist_name }}</h2>
 
-      <div class="col-md-4">
-        <div class="">
-          <div class="card-body text-center">
-            <img
-              class="mb-30 circle"
-              style="max-width:65%;"
-              v-if="user.profile_picture"
-              :src="user.profile_picture"
-              :alt="user.artist_name"
-            />
-            <h6 class="card-title mb-10">{{ user.artist_name }}</h6>
-            <p class="mb-0 fs-15 fw-regular">
-              {{ user.first_name }} {{ user.last_name }}
-            </p>
-            <p class="card-text mb-30">{{ user.bio }}</p>
-            <p class="mb-0">
-              <router-link
-                class="btn btn-primary pill m-1"
-                :to="`/users/${user.id}/edit`"
-                >Edit Profile</router-link
-              >
-              <!-- <a
-                href="#x"
-                class="btn btn-sm btn-facebook btn-circle btn-icon m-1"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a
-                href="#x"
-                class="btn btn-sm btn-twitter btn-circle btn-icon m-1"
-                ><i class="fab fa-twitter"></i
-              ></a>
-              <a
-                href="#x"
-                class="btn btn-sm btn-dribbble btn-circle btn-icon m-1"
-                ><i class="fab fa-dribbble"></i
-              ></a> -->
+        <div class="col-md-4">
+          <div class="">
+            <div class="card-body text-center">
+              <img
+                class="mb-30 circle"
+                style="max-width:65%;"
+                v-if="user.profile_picture"
+                :src="user.profile_picture"
+                :alt="user.artist_name"
+              />
+              <h6 class="card-title mb-10">{{ user.artist_name }}</h6>
+              <p class="mb-0 fs-15 fw-regular">
+                {{ user.first_name }} {{ user.last_name }}
+              </p>
+              <p class="card-text mb-30">{{ user.bio }}</p>
+              <p class="mb-0">
+                <router-link
+                  class="btn btn-primary pill m-1"
+                  :to="`/users/${user.id}/edit`"
+                  >Edit Profile</router-link
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div v-for="song in user.songs">
+        <div class="col-md-3">
+          <router-link :to="`/songs/${song.id}/`">
+            <center>
+              <p class="lead mt-3 mb-3">{{ song.title }}</p>
+            </center>
+            <center>
+              <img
+                :src="song.img_url"
+                class="figure-img img-fluid rounded w-75 raised move"
+                :alt="`${song.title}`"
+              />
+            </center>
+          </router-link>
+          <center>
+            <router-link class="btn btn-success m-1" :to="`/songs/${song.id}/`"
+              >VIEW</router-link
+            >
+          </center>
+        </div>
+
+        <router-link
+          class="btn btn-primary pill m-1"
+          :to="`/songs/${song.id}/edit`"
+          >Edit Song</router-link
+        >
+      </div> -->
+      <section id="shop" class="lg bg-white pb-70">
+        <div class="container">
+          <div class="section-heading text-center">
+            <h2 class="mb-15">{{ user.artist_name }}</h2>
+            <div class="spacer-line border-primary mb-20">&nbsp;</div>
+            <p class="w50 mb-70 m-x-auto">
+              {{ user.bio }}
             </p>
           </div>
-          <!-- / card-body -->
+          <!-- / section-heading -->
+          <h2 class="hidden">WORKS IN PROGRESS</h2>
+          <div class="row">
+            <div class="col-sm-6 col-md-3 mb-30">
+              <div v-for="song in user.songs">
+                <div class="product text-center">
+                  <!-- / sale-badge -->
+                  <router-link :to="`/songs/${song.id}/`">
+                    <img
+                      :src="song.img_url"
+                      alt=""
+                      class="mb-30 rounded raised"
+                    />
+                  </router-link>
+                  <p class="mb-1">
+                    <a
+                      :href="`/songs/${song.id}/`"
+                      class="card-title fs-18 fw-regular title-link"
+                      >{{ song.title }}</a
+                    >
+                  </p>
+                  <!-- <router-link
+                    class="btn btn-success m-1"
+                    :to="`/songs/${song.id}/`"
+                    >VIEW</router-link
+                  > -->
+                  <router-link
+                    class="btn btn-primary pill m-2"
+                    :to="`/songs/${song.id}/edit`"
+                    >Edit Song</router-link
+                  >
+                </div>
+                <!-- / product -->
+              </div>
+            </div>
+            <!-- / column -->
+          </div>
+          <!-- / row -->
         </div>
-        <!-- / card -->
-      </div>
-      <!-- / column -->
-
-      <!-- <img class="mb-30 circle" style="max-width:65%;"
-        v-if="user.profile_picture"
-        :src="user.profile_picture"
-        :alt="user.name"
-      /> -->
-      <!-- <img
-        v-if="!user.profile_picture"
-        :src="'../default-photo.png'"
-        :alt="user.name"
-        width="200"
-        height="200"
-      /> -->
-    </div>
-
-    <div v-for="song in user.songs">
-      <div class="col-md-3">
-        <router-link :to="`/songs/${song.id}/`">
-          <center>
-            <p class="lead mt-3 mb-3">{{ song.title }}</p>
-          </center>
-          <center>
-            <img
-              :src="song.img_url"
-              class="figure-img img-fluid rounded w-75 raised move"
-              :alt="`${song.title}`"
-            />
-          </center>
-        </router-link>
-        <center>
-          <!-- <button class="btn btn-primary pill m-1">Open Song</button> -->
-          <router-link class="btn btn-success m-1" :to="`/songs/${song.id}/`"
-            >VIEW</router-link
-          >
-        </center>
-      </div>
-
-      <!-- <router-link
-        class="btn btn-primary pill m-1"
-        :to="`/songs/${song.id}/edit`"
-        >Edit Song</router-link
-      > -->
-    </div>
+        <!-- / container -->
+      </section>
+      <!-- / shop -->
+    </body>
   </div>
 </template>
 
@@ -127,5 +148,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

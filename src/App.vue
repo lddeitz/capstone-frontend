@@ -29,7 +29,7 @@
             <!--nav start-->
             <div class="collapse navbar-collapse" id="navbar-toggle">
               <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item" v-if="isLoggedIn() && !isProfile()">
                   <router-link
                     class="nav-link smooth-scroll"
                     :to="`/users/${getUserId()}/`"
@@ -37,24 +37,24 @@
                   >
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" v-if="!isNewSong() && isLoggedIn()">
                   <router-link class="nav-link smooth-scroll" to="/songs/new">
                     NEW SONG
                   </router-link>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" v-if="isLoggedIn()">
                   <router-link class="nav-link smooth-scroll" to="/logout"
                     >LOGOUT</router-link
                   >
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" v-if="!isLoggedIn()">
                   <router-link class="nav-link smooth-scroll" to="/signup"
                     >SIGNUP</router-link
                   >
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" v-if="!isLoggedIn()">
                   <router-link class="nav-link smooth-scroll" to="/login"
                     >LOGIN</router-link
                   >

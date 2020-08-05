@@ -1,6 +1,6 @@
 <template>
   <div class="songs-show">
-    <div v-if="song.title">
+    <!-- <div v-if="song.title">
       <div class="song-info">
         <br />
         <div class="row mb-30">
@@ -24,28 +24,17 @@
             </center>
             <div class="spacer-2x">&nbsp;</div>
             <center>
-              <!--Button for Modal-->
-              <!-- <button
-                type="button"
-                class="btn btn-primary"
-                data-toggle="modal"
-                data-target="#commentModal"
-              >
-                Comment
-              </button> -->
-              <!--/Button for Modal-->
-
               <router-link
                 class="btn btn-primary pill m-1"
                 :to="`/songs/${song.id}/edit`"
                 >EDIT SONG</router-link
               >
-              <!-- <button
+              <button
                 class="btn btn-danger-gradient m-10"
                 v-on:click="deleteSong()"
               >
                 DELETE SONG
-              </button> -->
+              </button>
             </center>
           </div>
           <div class="col-6">
@@ -57,13 +46,6 @@
               <div class="spacer-line border-primary">&nbsp;</div>
               <div class="spacer-2x">&nbsp;</div>
             </div>
-            <!-- <strong>Description:</strong>
-
-            <p>{{ song.description }}</p>
-            <br />
-            <strong>Keywords:</strong>
-            <p>{{ song.keywords }}</p>
-            <br /> -->
             <div class="col-md-10">
               <div class="card">
                 <div class="card-body">
@@ -83,17 +65,17 @@
                 </div>
               </div>
 
-              <!-- <div class="promo-left mb-30">
-                    <div class="promo-container pl-60">
-                      <i
-                        class="fas fa-star promo-icon fs-40 d-block mb-25 left-30 text-info"
-                      ></i>
-                      <h6 class="box-title mb-15 text-hover info-hover">
-                        KEYWORDS
-                      </h6>
-                      <p class="card-text mt-15 mb-0">{{ song.keywords }}</p>
-                    </div>
-                  </div> -->
+              <div class="promo-left mb-30">
+                <div class="promo-container pl-60">
+                  <i
+                    class="fas fa-star promo-icon fs-40 d-block mb-25 left-30 text-info"
+                  ></i>
+                  <h6 class="box-title mb-15 text-hover info-hover">
+                    KEYWORDS
+                  </h6>
+                  <p class="card-text mt-15 mb-0">{{ song.keywords }}</p>
+                </div>
+              </div>
               <div class="card">
                 <div class="card-body">
                   <div class="promo-left">
@@ -104,29 +86,17 @@
                       <h6 class="box-title mb-15 text-hover danger-hover">
                         AUDIO
                       </h6>
-                      <!--Track Embed-->
                       <div class="song-embed">
                         <span v-html="song.url"></span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <!-- / promo-left -->
               </div>
-              <!-- / card-body -->
-              <!-- </div> -->
-              <!-- / card -->
             </div>
-            <!-- / column -->
           </div>
         </div>
 
-        <!--prismic.io-->
-        <!-- <div>
-        <prismic-embed :field="fields.songEmbed"/>
-        </div> -->
-
-        <!-- New Comment-->
         <div class="container">
           <h2>New Comment</h2>
           <form v-on:submit.prevent="createComment(song)">
@@ -160,9 +130,7 @@
           </form>
         </div>
 
-        <!--All Comments-->
-
-        <!-- <div class="total-comments">
+        <div class="total-comments">
           <div v-for="comment in song.comments">
             <strong
               ><p>{{ comment.author }}</p></strong
@@ -174,11 +142,9 @@
               <button v-on:click="showCommentEditForm(comment)">Edit</button>
               <button v-on:click="deleteComment(comment)">Delete</button>
             </div>
-            <br /> -->
+            <br />
 
-        <!--Edit Comment Tag Box-->
-
-        <!-- <div v-if="comment == currentComment">
+            <div v-if="comment == currentComment">
               <form v-on:submit.prevent="editComment(currentComment)">
                 Notes:<textarea
                   type="textarea"
@@ -214,9 +180,166 @@
               </form>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
-    </div>
+    </div> -->
+    <section id="about">
+      <div class="container">
+        <div class="box-w-image promo-box bg-transparent pl-45 pr-45">
+          <div class="row">
+            <div class="col-md-5 bg-img box-bg-image tablet-top-30">
+              <center>
+                <img
+                  :src="song.img_url"
+                  class="figure-img img-fluid rounded w-75 raised move"
+                  alt="album art"
+                />
+                <router-link
+                  class="btn btn-primary pill m-1"
+                  :to="`/songs/${song.id}/edit`"
+                  >EDIT SONG</router-link
+                >
+              </center>
+              <p class="mb-0"></p>
+            </div>
+            <div class="col-md-7 col-md-offset-5">
+              <div class="box-description pl-15">
+                <h6 class="mb-15">{{ song.title }}</h6>
+                <p class="mb-20">"{{ song.description }}"</p>
+                <strong
+                  ><p class="fw-regular fs-12 text-black mb-5">
+                    KEYWORDS: {{ song.keywords }}
+                  </p></strong
+                >
+                <p class="fw-regular fs-12 text-black mb-5"></p>
+                <div style="height: 80px">
+                  <div
+                    style="width: 90%; height: 5px;"
+                    aria-valuenow="90"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    <span v-html="song.url"></span>
+                  </div>
+                </div>
+                <!--Comment Code Attempt-->
+              </div>
+              <!-- / box-description -->
+            </div>
+            <!-- / column -->
+          </div>
+          <!-- / row -->
+        </div>
+        <!-- box-w-image -->
+      </div>
+      <!-- / container -->
+    </section>
+    <!-- / about -->
+    <!-- Comment Code Attempt -->
+        <div class="comments comments-boxed bg-light">
+            <h5 class="mb-3"></h5>
+            <!-- comment form -->
+            <div id="comment-form">
+              <h5 class="mb-3">FEEDBACK</h5>
+                  <div class="card card-outline-primary">
+                      <div class="card-body">
+                        <form v-on:submit.prevent="createComment(song)" id="commentForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        NOTE: <textarea type="text" rows="5" v-model="newCommentNotes" class="form-control border-faded" id="notes" placeholder="Drop a note!"></textarea>
+                                    </div>
+                                    <small>{{ 280 - newCommentNotes.length }} characters remaining.</small>
+                                </div><!-- / sub-column -->
+                                <div class="col-md-6 sub-col-left" v-if="!$parent.isLoggedIn()">
+                                    <div class="form-group">
+                                        NAME: <input v-model="newCommentAuthor" type="text" class="form-control border-faded" id="author" placeholder="Author">
+                                    </div>
+                                </div><!-- / sub-column -->
+                                <div class="col-md-6 sub-col-right">
+                                  TAG:
+                                  <div v-for="tag in tags">
+                                    <input
+                                        :value="tag.id"
+                                        type="checkbox"
+                                        :id="tag.id"
+                                        v-model="tagIds"
+                                      />
+                                      <label :for="tag.id">{{ tag.name }}</label>
+                                    </div>
+                                </div><!-- / sub-column -->
+                                <div class="col-md-6 sub-col-left">
+                                    <div class="form-group">
+                                        TIMESTAMP: <input id="song_timestamp" class="form-control border-faded" placeholder="0:00 - 0:02">
+                                    </div>
+                                </div>
+                            </div><!-- / row -->
+                            <button type="submit" id="form-submit"  class="btn btn-primary pill m-1"><span>Comment</span></button>
+                        </form><!-- / commentForm -->
+                      </div>
+                    </div>
+            </div>
+            <!-- / comment form -->
+
+            <div class="spacer">&nbsp;</div>
+
+            <ul class="media-list">
+                <li class="media">
+                    <div class="media-left">
+                        <a href="#x">
+                            <img class="media-object" alt="" src="/assets/images/placeholder-square.jpg">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="comment-info">
+                            <div class="comment-author">John Doe</div>
+                            <div class="comment-date">24 JAN 2020</div>
+                        </div><!-- / comment-info -->
+                        <div class="comment">
+                            <p class="mb-0">Proin ullamcorper sem id velit vestibulum tempus. Duis accumsan vel velit ut porttitor. Nam non molestie sapien. Phasellus interdum mauris tellus, a scelerisque orci convallis id. Maecenas nec elit varius tortor aliquet.</p>
+                        </div><!-- / comment -->
+
+                        <!-- nested media objects -->
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#x">
+                                    <img class="media-object" alt="" src="/assets/images/placeholder-square.jpg">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <div class="comment-info">
+                                    <div class="comment-author">Erika Doe</div>
+                                    <div class="comment-date">24 JAN 2020</div>
+                                </div><!-- / comment-info -->
+                                <div class="comment">
+                                    <p class="mb-0">Quisque et sagittis neque. Mauris suscipit lacus at ex placerat, vel ultricies justo bibendum. Aliquam sed mollis neque.</p>
+                                </div><!-- / comment -->
+                            </div><!-- / nested media objects media-body -->
+                        </div><!-- / nested media objects media -->
+                    </div><!-- / parent media-body -->
+                </li><!-- / media -->
+
+                <li class="media">
+                    <div class="media-left">
+                        <a href="#x">
+                            <img class="media-object" alt="" src="/assets/images/placeholder-square.jpg">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <div class="comment-info">
+                            <div class="comment-author">Brian Doe</div>
+                            <div class="comment-date">23 JAN 2020</div>
+                        </div><!-- / comment-info -->
+                        <div class="comment">
+                            <p class="mb-0">Donec auctor, felis vitae pulvinar lacinia, velit lectus lobortis est, et viverra massa est et odio. Integer aliquam augue id magna lacinia, nec venenatis lorem eleifend. Sed dapibus posuere dui, id luctus velit.</p>
+                        </div><!-- / comment -->
+                    </div><!-- / parent media-body -->
+                </li><!-- / media -->
+            </ul><!-- / media-list -->
+
+            <div class="spacer-2x">&nbsp;</div>
+        </div><!-- / comments-boxed -->
+    </div><!-- / container -->
   </div>
 </template>
 
@@ -335,5 +458,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
