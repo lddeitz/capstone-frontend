@@ -61,11 +61,30 @@
       <section id="shop" class="lg bg-white pb-70">
         <div class="container">
           <div class="section-heading text-center">
-            <h2 class="mb-15">{{ user.artist_name }}</h2>
-            <div class="spacer-line border-primary mb-20">&nbsp;</div>
-            <p class="w50 mb-70 m-x-auto">
-              {{ user.bio }}
-            </p>
+            <div class="widget text-center p-y-10">
+              <router-link :to="`/users/${user.id}/edit`">
+                <img
+                  v-if="user.profile_picture"
+                  :src="user.profile_picture"
+                  :alt="user.artist_name"
+                  class="circle w20 mb-15"
+                />
+              </router-link>
+              <h2 class="mb-15">{{ user.artist_name }}</h2>
+              <p class="mb-0 fs-15 fw-regular">
+                {{ user.first_name }} {{ user.last_name }}
+              </p>
+              <p class="w50 mb-70 m-x-auto">
+                {{ user.bio }}
+              </p>
+              <p class="mb-0">
+                <router-link
+                  class="btn btn-primary pill m-1"
+                  :to="`/users/${user.id}/edit`"
+                  >Edit Profile</router-link
+                >
+              </p>
+            </div>
           </div>
           <!-- / section-heading -->
           <h2 class="hidden">WORKS IN PROGRESS</h2>

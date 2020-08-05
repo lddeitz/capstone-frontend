@@ -39,7 +39,7 @@
 
     <div class="container">
       <div class="row mb-30">
-        <div class="col-6">
+        <div class="col-12">
           <p class="lead mt-3 mb-3"></p>
           <form
             class="validation-inner"
@@ -125,23 +125,9 @@
                 v-model="user.password"
               />
             </div>
-            <!-- / form-group -->
-            <button type="submit" class="btn btn-primary pill m-1">
-              Update
-            </button>
-          </form>
-        </div>
-        <!-- / col-sm-6 -->
-        <div class="col-6">
-          <center>
-            <img
-              class="figure-img img-fluid circle w-50 raised move"
-              :src="user.profile_picture"
-              alt="profile_picture"
-            />
-          </center>
-          <div class="form-group">
-            <center>
+            <div class="form-group">
+              <!-- / form-group -->
+              Profile Picture:<br />
               <input
                 type="file"
                 id="artwork"
@@ -150,10 +136,15 @@
                 v-on:change="setFile($event)"
                 ref="fileInput"
               />
-            </center>
-          </div>
-          <!-- / form-group -->
+            </div>
+            <!-- / form-group -->
+            <button type="submit" class="btn btn-primary pill m-1">
+              Update
+            </button>
+          </form>
         </div>
+        <!-- / col-sm-6 -->
+        <!-- / form-group -->
       </div>
     </div>
     <div class="spacer">&nbsp;</div>
