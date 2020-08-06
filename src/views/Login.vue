@@ -29,6 +29,7 @@
             <div class="card-body">
               <form
                 v-on:submit.prevent="submit()"
+                v-on:submit.prevent=
                 class="validation-inner"
                 id="login-form"
               >

@@ -14,7 +14,6 @@
         </center>
         <div class="spacer-2x">&nbsp;</div>
       </div>
-
       <!-- <div class="artist-info">
         <h2>{{ user.artist_name }}</h2>
 
@@ -99,14 +98,6 @@
             <div class="col-sm-6 col-md-3 mb-30">
               <div v-for="song in user.songs">
                 <div class="product text-center">
-                  <p class="mb-1">
-                    <a
-                      :href="`/songs/${song.id}/`"
-                      class="card-title fs-18 fw-regular title-link"
-                      >{{ song.title }}</a
-                    >
-                  </p>
-
                   <!-- / sale-badge -->
                   <div class="container">
                     <router-link :to="`/songs/${song.id}/`">
@@ -117,6 +108,13 @@
                       />
                     </router-link>
                   </div>
+                  <p class="mb-1">
+                    <a
+                      :href="`/songs/${song.id}/`"
+                      class="card-title fs-18 fw-regular title-link"
+                      >{{ song.title }}</a
+                    >
+                  </p>
                   <!-- <router-link
                     class="btn btn-success m-1"
                     :to="`/songs/${song.id}/`"

@@ -1,9 +1,6 @@
 <template>
   <div class="home">
-    <div
-      class="bg-primary-gradient"
-      style="background-image:url(/assets/images/dj-4595492_1920.jpg)"
-    >
+    <div style="background-image:url(/assets/images/dj-4595492_1920.jpg)">
       <header class="hero-image">
         <div class="height-90 v-center dark">
           <div class="container">
@@ -15,7 +12,7 @@
                 vision of a song - and keep every step leading up to it as
                 lowkey as you'd like.
               </p>
-              <a href="#x" class="btn btn-primary pill">
+              <a href="/signup" class="btn btn-primary pill">
                 <span>CREATE A FREE ACCOUNT</span></a
               >
             </div>
