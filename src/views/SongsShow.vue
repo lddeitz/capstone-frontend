@@ -1,383 +1,174 @@
 <template>
   <div class="songs-show">
-    <!-- <div v-if="song.title">
-      <div class="song-info">
-        <br />
-        <div class="row mb-30">
-          <div class="col-6">
-            <center>
-              <div class="container">
-                <div class="spacer-2x">&nbsp;</div>
-                <h2 class="section-title text-center mb-10">
-                  {{ song.title }}
-                </h2>
-                <div class="spacer-line border-primary">&nbsp;</div>
-                <div class="spacer-2x">&nbsp;</div>
-              </div>
-              <router-link :to="`/songs/${song.id}/edit`">
-                <img
-                  :src="song.img_url"
-                  class="figure-img img-fluid rounded w-50 raised move"
-                  alt="album art"
-                /><br />
-              </router-link>
-            </center>
-            <div class="spacer-2x">&nbsp;</div>
-            <center>
-              <router-link
-                class="btn btn-primary pill m-1"
-                :to="`/songs/${song.id}/edit`"
-                >EDIT SONG</router-link
-              >
-              <button
-                class="btn btn-danger-gradient m-10"
-                v-on:click="deleteSong()"
-              >
-                DELETE SONG
-              </button>
-            </center>
-          </div>
-          <div class="col-6">
-            <div class="container">
-              <div class="spacer-2x">&nbsp;</div>
-              <h2 class="section-title text-center mb-10">
-                LISTEN
-              </h2>
-              <div class="spacer-line border-primary">&nbsp;</div>
-              <div class="spacer-2x">&nbsp;</div>
-            </div>
-            <div class="col-md-10">
-              <div class="card">
-                <div class="card-body">
-                  <div class="promo-left mb-30">
-                    <div class="promo-container pl-60">
-                      <i
-                        class="ti-comment promo-icon fs-40 d-block mb-25 left-30 text-success"
-                      ></i>
-                      <h6 class="box-title mb-15 text-hover success-hover">
-                        DESCRIPTION
-                      </h6>
-                      <p class="card-text mt-15 mb-0">
-                        "{{ song.description }}"
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  <div class="container">
+    <div class="spacer-2x">&nbsp;</div>
+    <h2 class="section-title text-center mb-10">MIXING FEEDBACK<br></h2>
+    <div class="spacer-line border-primary">&nbsp;</div>
+    <div class="spacer-2x">&nbsp;</div>
+  </div>
+      <section class="big bg-white">
+          <div class="container">
+              <div class="row v-center">
+                  <div class="col-md-6">
+                      <h4 class="mb-20">{{song.title}}</h4>
+                      <strong><p class="fw-regular fs-12 text-black mb-2">
+                      KEYWORDS: {{ song.keywords }}</p></strong
+                      <p class="mb-30 lead">"{{song.description}}"</p>
+                      <div class="spacer-2x">&nbsp;</div>
+                    <center>
+                      <div class="promo-box p-y-10 bg-transparent">
+                          <div class="promo-container-big">
+                            <span v-html="song.url"></span>
+                          </div><!-- / promo-container -->
+                         
+                      
+                      </div><!-- / promo-box -->
+                      </center>
 
-              <div class="promo-left mb-30">
-                <div class="promo-container pl-60">
-                  <i
-                    class="fas fa-star promo-icon fs-40 d-block mb-25 left-30 text-info"
-                  ></i>
-                  <h6 class="box-title mb-15 text-hover info-hover">
-                    KEYWORDS
-                  </h6>
-                  <p class="card-text mt-15 mb-0">{{ song.keywords }}</p>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-body">
-                  <div class="promo-left">
-                    <div class="promo-container pl-60">
-                      <i
-                        class="ti-world promo-icon fs-40 d-block mb-25 left-30 text-danger"
-                      ></i>
-                      <h6 class="box-title mb-15 text-hover danger-hover">
-                        AUDIO
-                      </h6>
-                      <div class="song-embed">
-                        <span v-html="song.url"></span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                      <div class="promo-box pt-10 pb-0 mb-0 tablet-top-45 promo-center bg-transparent">
+                          <div class="promo-container-big">
+                            <img
+                        :src="song.img_url"
+                        alt=""
+                        class="promo-box-image rounded img-md mb-25">
+                        <br>
+                              <router-link
+                              class="btn btn-primary pill m-1 success"
+                              :to="`/songs/${song.id}/edit`"
+                              >EDIT SONG</router-link>
+                          </div><!-- / promo-container -->
+                      </div><!-- / promo-box -->
+                  </div><!-- / column -->
+
+                  <div class="col-md-6">
+                      <div class="form-holder p-y-40 p-x-30 rounded bg-white raised">
+                          <form v-on:submit.prevent="createComment(song)" class="validation-inner" id="commentForm">
+                              <div class="row">
+                                <div class="form-group col-6">
+                                  TIMESTAMP: <input id="song_timestamp" v-model="newSongTimestamp" class="form-control border-faded" placeholder="0:00 - 0:02">
+                              </div>
+                                  <div class="col-md-12 sub-col-left">
+                                      NOTES:<div class="form-group">
+                                        <textarea type="text" v-model="newCommentNotes" class="form-control border-faded" id="notes" 
+                                        required placeholder="Drop a note if something sounds like it could be improved!"></textarea>
+                                      </div>
+                                      <span v-if="newCommentNotes.length > 0">
+                                        <small>{{ 280 - newCommentNotes.length }} characters remaining</small>
+                                      </span><!-- / form-group -->
+                                  </div><!-- / column -->
+                                  <div class="col-md-6 sub-col-right">
+                                      <div class="form-group" v-if="!$parent.isLoggedIn()">
+                                          NAME: <input v-model="newCommentAuthor" type="text" class="form-control border-faded" id="author" placeholder="Author" required>
+                                      </div><!-- / form-group -->
+                                  </div><!-- / column -->
+                              </div><!-- / row -->
+                              <div class="form-group">
+                                TAGS:
+                                <div class="col-md-12">
+                                   <div class="checkbox" v-for="tag in tags">
+                                    <br>
+                                    <label class="hidden"><input type="list checkbox"></label>
+                                    <input  type="checkbox" :value="tag.id"
+                                    :id="tag.id"
+                                    v-model="tagIds">
+                                    <label :for="tag.id"><span class="fw-light">{{ tag.name }}</span></label><br>
+                                </div>
+                              </div><!-- / form-group -->
+                            </div>
+                            
+                            <center>
+                              <button type="submit" class="btn btn-md btn-primary btn-submit rounded col-6">COMMENT</button> 
+                              </center>
+                          </form><!-- / contact-form -->
+                      </div><!-- / form-holder -->
+                  </div><!-- / column -->
+              </div><!-- / row -->
+          </div><!-- / container -->
+      </section><!-- / contact -->
+
+      <div v-for="comment in song.comments">
+        <div class="card card-rounded col-12  ">
+          <div class="card-body">
+            <strong
+          ><h6>{{ comment.author }}</h6></strong
+        >
+        <p>{{ comment.notes }}</p>
+              <div class="tag-cloud">
+                  <p v-for="tag in comment.tags" class="badge badge-primary badge-pill">#{{ tag.name }}</p>
+              </div><!-- / tag-cloud -->
+          <!-- <p v-for="tag in comment.tags">{{ tag.name }}</p> -->
+        <p>{{ comment.song_timestamp }}</p>
+
+        <div v-if="$parent.getUserId() == comment.user_id">
+
+          <button class="btn btn-secondary m-1" v-on:click="showCommentEditForm(comment)">Edit</button>
+          <button class="btn btn-secondary m-1" v-on:click="deleteComment(comment)">Delete</button>
         </div>
+        <br />
 
-        <div class="container">
-          <h2>New Comment</h2>
-          <form v-on:submit.prevent="createComment(song)">
-            Notes:<textarea type="text" v-model="newCommentNotes"></textarea
+        <div v-if="comment == currentComment">
+          <form v-on:submit.prevent="editComment(currentComment)">
+            Notes:<br><textarea
+              type="textarea col-6"
+              v-model="currentComment.notes"
+            ></textarea
             ><br />
-            <small
-              >{{ 280 - newCommentNotes.length }} characters remaining.</small
-            ><br />
+            <div class="spacer-2x">&nbsp;</div>
+
             <div v-if="!$parent.isLoggedIn()">
-              Author:<input type="text" v-model="newCommentAuthor" /><br />
+              Author:<br><input
+                type="text"
+                v-model="currentComment.author"
+              /><br />
             </div>
-            Song Timestamp:<input
+            <div class="spacer-2x">&nbsp;</div>
+            Song Timestamp:<br><input
               type="text"
-              v-model="newSongTimestamp"
+              class="col-2"
+              v-model="currentComment.song_timestamp"
             /><br />
+            <div class="spacer-2x">&nbsp;</div>
+            Tags:
             <div v-for="tag in tags">
               <input
                 :value="tag.id"
                 type="checkbox"
+                class="card-body"
                 :id="tag.id"
-                v-model="tagIds"
+                v-model="selectedTagIds"
               />
               <label :for="tag.id">{{ tag.name }}</label>
             </div>
-            {{ tagIds }}
             <input
               type="submit"
-              class="btn btn-primary pill m-1"
-              value="Comment"
+              class="btn btn-primary"
+              value="Update Comment"
             />
           </form>
         </div>
-
-        <div class="total-comments">
-          <div v-for="comment in song.comments">
-            <strong
-              ><p>{{ comment.author }}</p></strong
-            >
-            <p>{{ comment.notes }}</p>
-            <p v-for="tag in comment.tags">{{ tag.name }}</p>
-            <p>{{ comment.song_timestamp }}</p>
-            <div v-if="$parent.getUserId() == comment.user_id">
-              <button v-on:click="showCommentEditForm(comment)">Edit</button>
-              <button v-on:click="deleteComment(comment)">Delete</button>
-            </div>
-            <br />
-
-            <div v-if="comment == currentComment">
-              <form v-on:submit.prevent="editComment(currentComment)">
-                Notes:<textarea
-                  type="textarea"
-                  v-model="currentComment.notes"
-                ></textarea
-                ><br />
-
-                <div v-if="!$parent.isLoggedIn()">
-                  Author:<input
-                    type="text"
-                    v-model="currentComment.author"
-                  /><br />
-                </div>
-                Song Timestamp:<input
-                  type="text"
-                  v-model="currentComment.song_timestamp"
-                /><br />
-                <div v-for="tag in tags">
-                  <input
-                    :value="tag.id"
-                    type="checkbox"
-                    :id="tag.id"
-                    v-model="selectedTagIds"
-                  />
-                  <label :for="tag.id">{{ tag.name }}</label>
-                </div>
-                {{ selectedTagIds }}
-                <input
-                  type="submit"
-                  class="btn btn-primary"
-                  value="Update Comment"
-                />
-              </form>
-            </div>
-          </div>
-        </div>
       </div>
-    </div> -->
-    <section id="about">
-      <div class="container">
-        <div class="box-w-image promo-box bg-transparent pl-45 pr-45">
-          <div class="row">
-            <div class="col-md-5 bg-img box-bg-image tablet-top-30">
-              <center>
-                <img
-                  :src="song.img_url"
-                  class="figure-img img-fluid rounded w-75 raised move"
-                  alt="album art"
-                />
-                <div class="spacer-2x">&nbsp;</div>
-                <router-link
-                  class="btn btn-primary pill m-1"
-                  :to="`/songs/${song.id}/edit`"
-                  >EDIT SONG</router-link
-                >
-              </center>
-              <p class="mb-0"></p>
-            </div>
-            <div class="col-md-7 col-md-offset-5">
-              <div class="box-description pl-15">
-                <h6 class="mb-15">{{ song.title }}</h6>
-                <strong
-                  ><p class="fw-regular fs-12 text-black mb-5">
-                    KEYWORDS: {{ song.keywords }}
-                  </p></strong
-                >
-                <p class="fw-regular fs-12 text-black mb-5"></p>
-                <div style="height: 80px">
-                  <div
-                    style="width: 90%; height: 5px;"
-                    aria-valuenow="90"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  >
-                    <span v-html="song.url"></span>
-                  </div>
-                  <!-- <div class="card dark bg-inverse"> -->
-                    <!-- <p class="text-primary mb-0"><strong>{{ user.artist_name }} said,</strong> -->
-                    <p class="mb-20">"{{ song.description }}"</p>
-                  <!-- </div> -->
-                </div>
-              </div>
-              <!-- / box-description -->
-            </div>
-            <!-- / column -->
           </div>
-          <!-- / row -->
-        </div>
-        <!-- box-w-image -->
-      </div>
-      <!-- / container -->
-    </section>
-    <!-- / about -->
-    <!-- Comment Code Attempt -->
-        <div class="comments comments-boxed bg-light">
-            <h5 class="mb-3"></h5>
-            <!-- comment form -->
-            <div id="comment-form">
-             <center> <h4 class="mb-3 text-primary mb-0">Give feedback on "{{ song.title }}".</h4><br></center>
-                  <div class="card card-outline-primary">
-                      <div class="card-body">
-                        <form v-on:submit.prevent="createComment(song)" id="commentForm">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        NOTES: <textarea type="text" v-model="newCommentNotes" class="form-control border-faded" id="notes" placeholder="Drop a note if something sounds like it could be improved!"></textarea>
-                                    </div>
-                                    <span v-if="newCommentNotes.length > 0">
-                                      <small>{{ 280 - newCommentNotes.length }} characters remaining.</small>
-                                    </span>
-                                </div><!-- / sub-column -->
-                                <div class="col-md-6 sub-col-left" v-if="!$parent.isLoggedIn()">
-                                    <div class="form-group">
-                                        NAME: <input v-model="newCommentAuthor" type="text" class="form-control border-faded" id="author" placeholder="Author">
-                                    </div>
-                                </div><!-- / sub-column -->
-                                <div class="card-body">
-                                  TAGS: 
-                                <div class="col-md-6">
-                                  
-                                  <br>
-                                  <div v-for="tag in tags"> 
-                                    <div class="list-checkbox">
-                                        <div class="checkbox checkbox-primary">
-                                            
-                                              <input
-                                                  :value="tag.id"
-                                                  type="checkbox"
-                                                  :id="tag.id"
-                                                  v-model="tagIds"
-                                                />
-                                              <label :for="tag.id">{{ tag.name }}</label>
-                                            
-                                        </div>
-                                        <br>
-                                    </div>
-
-                                  </div>
-                                  </div>
-                                </div><!-- / sub-column -->
-                                <div class="col-md-6 sub-col-left">
-                                    <div class="form-group">
-                                        TIMESTAMP: <input id="song_timestamp" v-model="newSongTimestamp" class="form-control border-faded" placeholder="0:00 - 0:02">
-                                    </div>
-                                </div>
-                            </div><!-- / row -->
-                            <button type="submit" id="form-submit"  class="btn btn-primary pill m-1"><span>COMMENT</span></button>
-                        </form><!-- / commentForm -->
-                      </div>
-                    </div>
-            </div>
-            <!-- / comment form -->
-
-            <div class="spacer">&nbsp;</div>
-
+        </div><!-- / card -->
+      <!-- <ul class="media-list">
+          <li class="media">
             <div v-for="comment in song.comments">
-              <div class="card">
-                <div class="card-body">
-                  <strong
-                ><p>{{ comment.author }}</p></strong
-              >
-              <p>{{ comment.notes }}</p>
-                    <div class="tag-cloud">
-                        <p v-for="tag in comment.tags" class="badge badge-primary badge-pill">#{{ tag.name }}</p>
-                    </div><!-- / tag-cloud -->
-                <!-- <p v-for="tag in comment.tags">{{ tag.name }}</p> -->
-              <p>{{ comment.song_timestamp }}</p>
-
-              <div v-if="$parent.getUserId() == comment.user_id">
-
-                <button class="btn btn-secondary m-1" v-on:click="showCommentEditForm(comment)">Edit</button>
-                <button class="btn btn-secondary m-1" v-on:click="deleteComment(comment)">Delete</button>
-              </div>
-              <br />
-
-              <div v-if="comment == currentComment">
-                <form v-on:submit.prevent="editComment(currentComment)">
-                  Notes:<textarea
-                    type="textarea"
-                    v-model="currentComment.notes"
-                  ></textarea
-                  ><br />
-
-                  <div v-if="!$parent.isLoggedIn()">
-                    Author:<input
-                      type="text"
-                      v-model="currentComment.author"
-                    /><br />
+              <div class="media-body">
+                  <div class="comment-info">
+                      <div class="comment-author">{{ comment.author }}</div>
+                      <p v-for="tag in comment.tags">{{ tag.name }}</p>
+                      <p>{{ comment.song_timestamp }}</p>
                   </div>
-                  Song Timestamp:<input
-                    type="text"
-                    v-model="currentComment.song_timestamp"
-                  /><br />
-                  <div v-for="tag in tags">
-                    <input
-                      :value="tag.id"
-                      type="checkbox"
-                      :id="tag.id"
-                      v-model="selectedTagIds"
-                    />
-                    <label :for="tag.id">{{ tag.name }}</label>
+                  <div class="comment">
+                      <p class="mb-0">{{ comment.notes }}</p>
                   </div>
-                  {{ selectedTagIds }}
-                  <input
-                    type="submit"
-                    class="btn btn-primary"
-                    value="Update Comment"
-                  />
-                </form>
               </div>
             </div>
-                </div>
-              </div><!-- / card -->
-            <!-- <ul class="media-list">
-                <li class="media">
-                  <div v-for="comment in song.comments">
-                    <div class="media-body">
-                        <div class="comment-info">
-                            <div class="comment-author">{{ comment.author }}</div>
-                            <p v-for="tag in comment.tags">{{ tag.name }}</p>
-                            <p>{{ comment.song_timestamp }}</p>
-                        </div>
-                        <div class="comment">
-                            <p class="mb-0">{{ comment.notes }}</p>
-                        </div>
-                    </div>
-                  </div>
-                </li>
-            </ul> -->
-            <div class="spacer-2x">&nbsp;</div>
-        </div>
-    </div>
+          </li>
+      </ul> -->
+      <div class="spacer-2x">&nbsp;</div>
   </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -418,6 +209,11 @@ export default {
     // axios.get(`/api/songs/${this.$route.params.url}`).then(response => {
     //   console.log(response.data);
     //   this.song.url = response.data;
+    // });
+
+    // axios.get(`/api/users/`).then(response => {
+    //   console.log(response.data);
+    //   this.users = response.data;
     // });
 
     axios.get(`/api/tags/`).then((response) => {

@@ -109,7 +109,7 @@
               <!-- </div> -->
               <!-- / form-group -->
               <button type="submit" class="btn btn-primary pill m-1">
-                UPDATE
+                UPDATE SONG
               </button>
             </form>
           <!-- </div> -->

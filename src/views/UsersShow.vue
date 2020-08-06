@@ -1,52 +1,63 @@
 <template>
   <div class="users-show">
     <body>
-      <div class="container">
-        <div class="spacer-2x">&nbsp;</div>
-        <h2 class="section-title text-center mb-10">
+      <div style="background-image:url(/assets/images/dj-4856147_1920.jpg)">
+        <!-- <div class="header bg-primary-gradient"> -->
+        <header class="hero image">
           <div class="container">
-            <!-- <img
-              class="figure-img img-fluid circle w-75"
-              style="max-width:10%; max-height:10%;"
-              v-if="user.profile_picture"
-              :src="user.profile_picture"
-              :alt="user.artist_name"
-            /> -->
-
-            <!-- / column -->
-          </div>
-          <center>
-            <div class="col-md-3 card card-rounded">
-              <div class="widget text-center p-30 bg-white">
-                <img
+            <div class="spacer-2x">&nbsp;</div>
+            <h2 class="section-title text-center mb-10">
+              <div class="container">
+                <!-- <img
+                  class="figure-img img-fluid circle w-75"
+                  style="max-width:10%; max-height:10%;"
+                  v-if="user.profile_picture"
                   :src="user.profile_picture"
-                  alt=""
-                  class="circle w-50 mb-15"
-                />
-                <h6 class="widget-title">{{ user.artist_name }}</h6>
-                <p
-                  class="fs-12 post-meta-small pt-15 pb-15 mt-15 mb-15 border-faded"
-                >
-                  {{ user.first_name }} {{ user.last_name }}
-                </p>
-                <p class="mb-0">{{ user.bio }}</p>
+                  :alt="user.artist_name"
+                /> -->
+
+                <!-- / column -->
               </div>
-              <!-- / widget -->
-            </div>
-            <!-- / column -->
-          </center>
-        </h2>
-        <!-- <div class="spacer-line border-primary">&nbsp;</div>
-        <div class="spacer-2x">&nbsp;</div> -->
-        <center></center>
-        <div class="spacer-2x">&nbsp;</div>
+              <!-- <div style="background-image:url(/assets/images/dj-4595492_1920.jpg)"> -->
+              <center>
+                <div class="col-md-3 card card-rounded">
+                  <div class="widget text-center p-30 bg-white">
+                    <!-- <i class="fas fa-star card-icon-tag text-warning"></i> -->
+                    <router-link :to="`/users/${user.id}/edit`">
+                      <img
+                        :src="user.profile_picture"
+                        alt=""
+                        class="circle w-50 mb-15"
+                      />
+                    </router-link>
+                    <h6 class="widget-title text-primary mb-0">
+                      {{ user.artist_name }}
+                    </h6>
+                    <p
+                      class="fs-12 post-meta-small pt-15 pb-15 mt-15 mb-15 border-faded"
+                    >
+                      {{ user.first_name }} {{ user.last_name }}
+                    </p>
+                    <p class="mb-0">{{ user.bio }}</p>
+                  </div>
+                  <!-- / widget -->
+                </div>
+                <!-- / column -->
+              </center>
+            </h2>
+            <!-- <div class="spacer-line border-primary">&nbsp;</div>
+            <div class="spacer-2x">&nbsp;</div> -->
+            <center></center>
+            <div class="spacer-2x">&nbsp;</div>
+          </div>
+        </header>
       </div>
 
       <!-- <div class="col-md-4">
                 <div class="card card-rounded text-center">
                     <div class="card-body">
                         <i class="ti-quote-right fs-18 card-icon-tag text-warning"></i>
-                        <img src="assets/images/placeholder-square.jpg" alt="" class="promo-box-image circle mt-20 mb-15">
+                        <img src="/assets/images/placeholder-square.jpg" alt="" class="promo-box-image circle mt-20 mb-15">
                         <p class="mb-0 fs-18">Erika Doe</p>
                         <p class="fs-12 post-meta-small pt-15 pb-15 mt-15 mb-15 border-faded"><i class="ti-calendar text-success"></i> 21 Jan 2020 <span class="mr-5 ml-5 text-muted">/</span> <i class="ti-bookmark text-warning"></i> Photography</p>
                         <p class="mb-0 fs-14">"Fusce imperdiet sollicitudin scelerisque. Etiam tristique eu nisl ut dapibus. Donec et vehicula cursus pretium."</p>
@@ -127,8 +138,15 @@
       <section id="shop" class="lg bg-white pb-70">
         <div class="container">
           <div class="container">
-            <h2 class="section-title text-center mb-10">SONGS</h2>
+            <h2 class="section-title text-center mb-10">SONGS IN PROGRESS</h2>
             <div class="spacer-line border-primary">&nbsp;</div>
+            <br />
+            <center>
+              <p>
+                You can add or view a song and edit your <br />
+                profile info at any time from here.
+              </p>
+            </center>
             <div class="spacer-2x">&nbsp;</div>
           </div>
           <!-- <div class="section-heading text-center">

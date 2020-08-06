@@ -5,11 +5,11 @@
         <div class="height-90 v-center dark">
           <div class="container">
             <div class="w60 m-auto text-center">
-              <h1 class="mb-20">KEEP FOCUSED.</h1>
+              <h1 class="mb-20">FOCUS FOR YOU.</h1>
               <p class="mb-20">
-                You know who you go to for advice on your songs before they're
-                finished. Keep their feedback all in one place as you mix
-                towards your end goal and track your progress along the way.
+                You know who your go-to's are when you need mixing advice. Now
+                keep their feedback contained in one place as you prep your song
+                for the rest of the world.
               </p>
               <a href="/signup" class="btn btn-primary pill">
                 <span>CREATE A FREE ACCOUNT</span></a

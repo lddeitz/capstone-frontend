@@ -2693,47 +2693,47 @@ textarea.form-control {
 }
 
 ::-moz-placeholder {
-  color: #c8cbcd !important;
+  color: #27292b !important;
 }
 
 :-moz-placeholder {
-  color: #c8cbcd !important;
+  color: #27292b !important;
 }
 
 :-ms-input-placeholder {
-  color: #c8cbcd !important;
+  color: #27292b !important;
 }
 
 .error::-webkit-input-placeholder {
-  color: #f23729 !important;
+  color: #484a4b !important;
 }
 
 .error::-moz-placeholder {
-  color: #f23729 !important;
+  color: #484a4b !important;
 }
 
 .error:-moz-placeholder {
-  color: #f23729 !important;
+  color: #484a4b !important;
 }
 
 .error:-ms-input-placeholder {
-  color: #f23729 !important;
+  color: #484a4b !important;
 }
 
 .valid::-webkit-input-placeholder {
-  color: #f23729 !important;
+  color: #484a4b !important;
 }
 
 .valid::-moz-placeholder {
-  color: #f23729 !important;
+  color: #484a4b !important;
 }
 
 .valid:-moz-placeholder {
-  color: #f23729 !important;
+  color: #484a4b !important;
 }
 
 .valid:-ms-input-placeholder {
-  color: #f23729 !important;
+  color: #484a4b !important;
 }
 
 .form-inline.dark ::-webkit-input-placeholder {
