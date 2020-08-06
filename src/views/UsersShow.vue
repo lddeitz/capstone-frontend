@@ -3,10 +3,18 @@
     <body>
       <div class="container">
         <div class="spacer-2x">&nbsp;</div>
-        <h2 class="section-title text-center mb-10">{{ user.artist_name }}</h2>
+        <h2 class="section-title text-center mb-10">SONG BOARD</h2>
         <div class="spacer-line border-primary">&nbsp;</div>
         <div class="spacer-2x">&nbsp;</div>
+        <center>
+          <p>
+            To navigate into one of the song's feedback views, click on the
+            artwork.
+          </p>
+        </center>
+        <div class="spacer-2x">&nbsp;</div>
       </div>
+
       <!-- <div class="artist-info">
         <h2>{{ user.artist_name }}</h2>
 
@@ -91,14 +99,6 @@
             <div class="col-sm-6 col-md-3 mb-30">
               <div v-for="song in user.songs">
                 <div class="product text-center">
-                  <!-- / sale-badge -->
-                  <router-link :to="`/songs/${song.id}/`">
-                    <img
-                      :src="song.img_url"
-                      alt=""
-                      class="mb-30 rounded raised"
-                    />
-                  </router-link>
                   <p class="mb-1">
                     <a
                       :href="`/songs/${song.id}/`"
@@ -106,6 +106,17 @@
                       >{{ song.title }}</a
                     >
                   </p>
+
+                  <!-- / sale-badge -->
+                  <div class="container">
+                    <router-link :to="`/songs/${song.id}/`">
+                      <img
+                        :src="song.img_url"
+                        alt=""
+                        class="mb-30 rounded raised"
+                      />
+                    </router-link>
+                  </div>
                   <!-- <router-link
                     class="btn btn-success m-1"
                     :to="`/songs/${song.id}/`"
