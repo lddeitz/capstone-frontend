@@ -2689,7 +2689,7 @@ textarea.form-control {
 
 /*--- input placeholder color ---*/
 ::-webkit-input-placeholder {
-  color: #c8cbcd !important;
+  color: #484a4b !important;
 }
 
 ::-moz-placeholder {
@@ -8895,6 +8895,16 @@ img {
   background-color: transparent !important;
 }
 
+.bg-custom-gradient {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    176deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(54, 54, 180, 0.7973564425770308) 54%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
 .bg-white {
   background-color: #fff !important;
 }
@@ -8957,6 +8967,11 @@ img {
 
 .bg-primary-gradient {
   background: linear-gradient(120deg, #00bcd7 0%, #4be0f6 100%) !important;
+}
+
+.bg-primary-custom-gradient {
+  background: linear-gradient(120deg, #0497ad, #4ddd60, transparent),
+    url("/assets/images/dj-4595492_1920.jpg") no-repeat center !important;
 }
 
 .bg-secondary {
@@ -10668,3 +10683,30 @@ a.text-danger:hover {
 /*-------       end of 576px       -------*/
 /*------------- end of min-widths -------------*/
 /*---------------- end of media screens ----------------*/
+
+.main-custom-header {
+  background: linear-gradient(#004092, #020202, transparent),
+    url("/assets/images/studio-222.jpg") no-repeat center;
+}
+
+.hero-image {
+  background-image: linear-gradient(
+      rgba(35, 117, 110, 0.534),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("/assets/images/studio-222.jpg");
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}

@@ -158,6 +158,9 @@
         </button>
       </div>
     </center>
+    <div class="spacer">&nbsp;</div>
+
+    <div class="spacer">&nbsp;</div>
   </div>
 </template>
 

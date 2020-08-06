@@ -1,14 +1,10 @@
 <template>
   <div id="app">
     <body>
-      <header
-        class="bg-white pt-10 bg-img bg-fixed"
-        style="background-image: url(/assets/images/erika-header.jpg)"
-      >
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-lg dark bg-inverse">
           <div class="container">
-            <a class="navbar-brand" href="/index.html">
-              <img src="/assets/images/logo.png" alt=""
+            <a class="navbar-brand" href="/">
+              <img src="/assets/images/SOUNDJEK-LOGO.png" height="120%" alt=""
             /></a>
 
             <button
@@ -43,6 +39,18 @@
                   </router-link>
                 </li>
 
+                <li
+                  class="nav-item"
+                  v-if="isLoggedIn() && !isEditProfile() && !isHome()"
+                >
+                  <router-link
+                    class="nav-link smooth-scroll"
+                    :to="`/users/${getUserId()}/edit`"
+                  >
+                    EDIT PROFILE</router-link
+                  >
+                </li>
+
                 <li class="nav-item" v-if="isLoggedIn()">
                   <router-link class="nav-link smooth-scroll" to="/logout"
                     >LOGOUT</router-link
@@ -71,16 +79,13 @@
 
       <router-view />
       <!--Start of Footer-->
-      <div class="spacer-2x">&nbsp;</div>
       <footer class="dark bg-inverse">
         <div class="container text-center">
           <div class="row v-center">
-            <div class="col-lg-6 footer-left-area">
               <p>
                 © 2020 <span class="fw-regular">SOUNDJEK</span>. All Rights
                 Reserved.
               </p>
-            </div>
             <!-- / footer-left-area
           <div class="col-lg-6 footer-right-area">
             <p>
@@ -123,6 +128,12 @@ export default {
     },
     isNewSong: function() {
       return this.$route.name === "songs-new";
+    },
+    isEditProfile: function() {
+      return this.$route.name === "users-edit";
+    },
+    isHome: function() {
+      return this.$route.name === "Home";
     },
   },
 };

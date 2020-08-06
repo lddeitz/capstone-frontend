@@ -1,6 +1,12 @@
 <template>
   <div class="users-show">
     <body>
+      <div class="container">
+        <div class="spacer-2x">&nbsp;</div>
+        <h2 class="section-title text-center mb-10">{{ user.artist_name }}</h2>
+        <div class="spacer-line border-primary">&nbsp;</div>
+        <div class="spacer-2x">&nbsp;</div>
+      </div>
       <!-- <div class="artist-info">
         <h2>{{ user.artist_name }}</h2>
 
@@ -62,7 +68,7 @@
         <div class="container">
           <div class="section-heading text-center">
             <div class="widget text-center p-y-10">
-              <router-link :to="`/users/${user.id}/edit`">
+              <!-- <router-link :to="`/users/${user.id}/edit`">
                 <img
                   v-if="user.profile_picture"
                   :src="user.profile_picture"
@@ -76,18 +82,11 @@
               </p>
               <p class="w50 mb-70 m-x-auto">
                 {{ user.bio }}
-              </p>
-              <p class="mb-0">
-                <router-link
-                  class="btn btn-primary pill m-1"
-                  :to="`/users/${user.id}/edit`"
-                  >Edit Profile</router-link
-                >
-              </p>
+              </p> -->
             </div>
           </div>
           <!-- / section-heading -->
-          <h2 class="hidden">WORKS IN PROGRESS</h2>
+          <h2></h2>
           <div class="row">
             <div class="col-sm-6 col-md-3 mb-30">
               <div v-for="song in user.songs">
@@ -117,6 +116,7 @@
                     :to="`/songs/${song.id}/edit`"
                     >Edit Song</router-link
                   >
+                  <div class="spacer-2x">&nbsp;</div>
                 </div>
                 <!-- / product -->
               </div>

@@ -119,6 +119,7 @@
               Upload
             </button>
           </form>
+           <div class="spacer">&nbsp;</div>
         <!-- </div> -->
         <!-- / col-sm-6 -->
       <!-- </div> -->

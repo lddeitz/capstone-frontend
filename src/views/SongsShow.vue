@@ -194,6 +194,7 @@
                   class="figure-img img-fluid rounded w-75 raised move"
                   alt="album art"
                 />
+                <div class="spacer-2x">&nbsp;</div>
                 <router-link
                   class="btn btn-primary pill m-1"
                   :to="`/songs/${song.id}/edit`"
@@ -222,7 +223,6 @@
                     <span v-html="song.url"></span>
                   </div>
                 </div>
-                <!--Comment Code Attempt-->
               </div>
               <!-- / box-description -->
             </div>
@@ -247,7 +247,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        NOTE: <textarea type="text" rows="5" v-model="newCommentNotes" class="form-control border-faded" id="notes" placeholder="Drop a note!"></textarea>
+                                        NOTES: <textarea type="text" v-model="newCommentNotes" class="form-control border-faded" id="notes" placeholder="Drop a note!"></textarea>
                                     </div>
                                     <small>{{ 280 - newCommentNotes.length }} characters remaining.</small>
                                 </div><!-- / sub-column -->
@@ -256,6 +256,7 @@
                                         NAME: <input v-model="newCommentAuthor" type="text" class="form-control border-faded" id="author" placeholder="Author">
                                     </div>
                                 </div><!-- / sub-column -->
+                                
                                 <div class="col-md-6 sub-col-right">
                                   TAG:
                                   <div v-for="tag in tags">
@@ -266,15 +267,15 @@
                                         v-model="tagIds"
                                       />
                                       <label :for="tag.id">{{ tag.name }}</label>
-                                    </div>
+                                  </div>
                                 </div><!-- / sub-column -->
                                 <div class="col-md-6 sub-col-left">
                                     <div class="form-group">
-                                        TIMESTAMP: <input id="song_timestamp" class="form-control border-faded" placeholder="0:00 - 0:02">
+                                        TIMESTAMP: <input id="song_timestamp" v-model="newSongTimestamp" class="form-control border-faded" placeholder="0:00 - 0:02">
                                     </div>
                                 </div>
                             </div><!-- / row -->
-                            <button type="submit" id="form-submit"  class="btn btn-primary pill m-1"><span>Comment</span></button>
+                            <button type="submit" id="form-submit"  class="btn btn-primary pill m-1"><span>COMMENT</span></button>
                         </form><!-- / commentForm -->
                       </div>
                     </div>
@@ -283,63 +284,82 @@
 
             <div class="spacer">&nbsp;</div>
 
-            <ul class="media-list">
+            <div v-for="comment in song.comments">
+              <div class="card">
+                <div class="card-body">
+                  <strong
+                ><p>{{ comment.author }}</p></strong
+              >
+              <p>{{ comment.notes }}</p>
+                    <div class="tag-cloud">
+                        <p v-for="tag in comment.tags" class="badge badge-primary badge-pill">#{{ tag.name }}</p>
+                    </div><!-- / tag-cloud -->
+                <!-- <p v-for="tag in comment.tags">{{ tag.name }}</p> -->
+              <p>{{ comment.song_timestamp }}</p>
+
+              <div v-if="$parent.getUserId() == comment.user_id">
+                <button v-on:click="showCommentEditForm(comment)">Edit</button>
+                <button v-on:click="deleteComment(comment)">Delete</button>
+              </div>
+              <br />
+
+              <div v-if="comment == currentComment">
+                <form v-on:submit.prevent="editComment(currentComment)">
+                  Notes:<textarea
+                    type="textarea"
+                    v-model="currentComment.notes"
+                  ></textarea
+                  ><br />
+
+                  <div v-if="!$parent.isLoggedIn()">
+                    Author:<input
+                      type="text"
+                      v-model="currentComment.author"
+                    /><br />
+                  </div>
+                  Song Timestamp:<input
+                    type="text"
+                    v-model="currentComment.song_timestamp"
+                  /><br />
+                  <div v-for="tag in tags">
+                    <input
+                      :value="tag.id"
+                      type="checkbox"
+                      :id="tag.id"
+                      v-model="selectedTagIds"
+                    />
+                    <label :for="tag.id">{{ tag.name }}</label>
+                  </div>
+                  {{ selectedTagIds }}
+                  <input
+                    type="submit"
+                    class="btn btn-primary"
+                    value="Update Comment"
+                  />
+                </form>
+              </div>
+            </div>
+                </div>
+              </div><!-- / card -->
+            <!-- <ul class="media-list">
                 <li class="media">
-                    <div class="media-left">
-                        <a href="#x">
-                            <img class="media-object" alt="" src="/assets/images/placeholder-square.jpg">
-                        </a>
-                    </div>
+                  <div v-for="comment in song.comments">
                     <div class="media-body">
                         <div class="comment-info">
-                            <div class="comment-author">John Doe</div>
-                            <div class="comment-date">24 JAN 2020</div>
-                        </div><!-- / comment-info -->
+                            <div class="comment-author">{{ comment.author }}</div>
+                            <p v-for="tag in comment.tags">{{ tag.name }}</p>
+                            <p>{{ comment.song_timestamp }}</p>
+                        </div>
                         <div class="comment">
-                            <p class="mb-0">Proin ullamcorper sem id velit vestibulum tempus. Duis accumsan vel velit ut porttitor. Nam non molestie sapien. Phasellus interdum mauris tellus, a scelerisque orci convallis id. Maecenas nec elit varius tortor aliquet.</p>
-                        </div><!-- / comment -->
-
-                        <!-- nested media objects -->
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#x">
-                                    <img class="media-object" alt="" src="/assets/images/placeholder-square.jpg">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <div class="comment-info">
-                                    <div class="comment-author">Erika Doe</div>
-                                    <div class="comment-date">24 JAN 2020</div>
-                                </div><!-- / comment-info -->
-                                <div class="comment">
-                                    <p class="mb-0">Quisque et sagittis neque. Mauris suscipit lacus at ex placerat, vel ultricies justo bibendum. Aliquam sed mollis neque.</p>
-                                </div><!-- / comment -->
-                            </div><!-- / nested media objects media-body -->
-                        </div><!-- / nested media objects media -->
-                    </div><!-- / parent media-body -->
-                </li><!-- / media -->
-
-                <li class="media">
-                    <div class="media-left">
-                        <a href="#x">
-                            <img class="media-object" alt="" src="/assets/images/placeholder-square.jpg">
-                        </a>
+                            <p class="mb-0">{{ comment.notes }}</p>
+                        </div>
                     </div>
-                    <div class="media-body">
-                        <div class="comment-info">
-                            <div class="comment-author">Brian Doe</div>
-                            <div class="comment-date">23 JAN 2020</div>
-                        </div><!-- / comment-info -->
-                        <div class="comment">
-                            <p class="mb-0">Donec auctor, felis vitae pulvinar lacinia, velit lectus lobortis est, et viverra massa est et odio. Integer aliquam augue id magna lacinia, nec venenatis lorem eleifend. Sed dapibus posuere dui, id luctus velit.</p>
-                        </div><!-- / comment -->
-                    </div><!-- / parent media-body -->
-                </li><!-- / media -->
-            </ul><!-- / media-list -->
-
+                  </div>
+                </li>
+            </ul> -->
             <div class="spacer-2x">&nbsp;</div>
-        </div><!-- / comments-boxed -->
-    </div><!-- / container -->
+        </div>
+    </div>
   </div>
 </template>
 

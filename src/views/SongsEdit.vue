@@ -98,7 +98,7 @@
                       Artwork:
                       <input
                         type="file"
-                        
+                        class="form-control"
                         id="artwork"
                         name="inputArtwork"
                         placeholder="Artwork"
