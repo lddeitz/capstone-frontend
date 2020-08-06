@@ -5,7 +5,7 @@
         <div class="height-90 v-center dark">
           <div class="container">
             <div class="w60 m-auto text-center">
-              <h1 class="mb-20">FOCUS FOR YOU.</h1>
+              <h1 class="mb-20">TRACK YOUR MIXING</h1>
               <p class="mb-20">
                 You know who your go-to's are when you need mixing advice. Now
                 keep their feedback contained in one place as you prep your song
@@ -91,10 +91,10 @@
 export default {
   data: function() {
     return {
-      message: "Welcome to Vue.js!",
+      message: "Welcome to Vue.js!"
     };
   },
   created: function() {},
-  methods: {},
+  methods: {}
 };
 </script>

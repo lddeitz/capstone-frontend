@@ -98,9 +98,9 @@
                 placeholder="Bio"
                 v-model="user.bio"
               ></textarea>
-              <span v-if="user.bio.length > 0">
+              <!-- <span v-if="user.bio.length > 0">
                 <small>{{ 40 - user.bio.length }} characters remaining</small>
-              </span>
+              </span> -->
             </div>
             <!-- / form-group -->
             <div class="form-group">
@@ -177,11 +177,11 @@ export default {
       // first_name: "",
       // last_name: "",
       // bio: "",
-      profile_picture: "",
+      profile_picture: ""
     };
   },
   created: function() {
-    axios.get(`/api/users/${this.$route.params.id}`).then((response) => {
+    axios.get(`/api/users/${this.$route.params.id}`).then(response => {
       // console.log(response.data);
       this.user = response.data;
       console.log(this.user);
@@ -206,12 +206,12 @@ export default {
       }
       axios
         .patch(`/api/users/${this.user.id}`, formData)
-        .then((response) => {
+        .then(response => {
           // console.log(response.data);
           this.user = response.data;
           this.$router.push(`/users/${this.user.id}`);
         })
-        .catch((error) => {
+        .catch(error => {
           this.errors = error.response.data.errors;
         });
       // var params = {
@@ -240,14 +240,12 @@ export default {
     },
     deleteUser: function() {
       if (confirm("Are you sure you want to delete your account?")) {
-        axios.delete(`/api/users/${this.user.id}`).then((response) => {
+        axios.delete(`/api/users/${this.user.id}`).then(response => {
           console.log("Account deleted.", response.data);
           this.$router.push("/signup");
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
-
-<style></style>
