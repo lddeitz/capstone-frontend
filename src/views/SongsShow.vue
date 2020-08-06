@@ -206,7 +206,6 @@
             <div class="col-md-7 col-md-offset-5">
               <div class="box-description pl-15">
                 <h6 class="mb-15">{{ song.title }}</h6>
-                <p class="mb-20">"{{ song.description }}"</p>
                 <strong
                   ><p class="fw-regular fs-12 text-black mb-5">
                     KEYWORDS: {{ song.keywords }}
@@ -222,6 +221,10 @@
                   >
                     <span v-html="song.url"></span>
                   </div>
+                  <!-- <div class="card dark bg-inverse"> -->
+                    <!-- <p class="text-primary mb-0"><strong>{{ user.artist_name }} said,</strong> -->
+                    <p class="mb-20">"{{ song.description }}"</p>
+                  <!-- </div> -->
                 </div>
               </div>
               <!-- / box-description -->
@@ -240,33 +243,46 @@
             <h5 class="mb-3"></h5>
             <!-- comment form -->
             <div id="comment-form">
-              <h5 class="mb-3">FEEDBACK</h5>
+             <center> <h4 class="mb-3 text-primary mb-0">Give feedback on "{{ song.title }}".</h4><br></center>
                   <div class="card card-outline-primary">
                       <div class="card-body">
                         <form v-on:submit.prevent="createComment(song)" id="commentForm">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        NOTES: <textarea type="text" v-model="newCommentNotes" class="form-control border-faded" id="notes" placeholder="Drop a note!"></textarea>
+                                        NOTES: <textarea type="text" v-model="newCommentNotes" class="form-control border-faded" id="notes" placeholder="Drop a note if something sounds like it could be improved!"></textarea>
                                     </div>
-                                    <small>{{ 280 - newCommentNotes.length }} characters remaining.</small>
+                                    <span v-if="newCommentNotes.length > 0">
+                                      <small>{{ 280 - newCommentNotes.length }} characters remaining.</small>
+                                    </span>
                                 </div><!-- / sub-column -->
                                 <div class="col-md-6 sub-col-left" v-if="!$parent.isLoggedIn()">
                                     <div class="form-group">
                                         NAME: <input v-model="newCommentAuthor" type="text" class="form-control border-faded" id="author" placeholder="Author">
                                     </div>
                                 </div><!-- / sub-column -->
-                                
-                                <div class="col-md-6 sub-col-right">
-                                  TAG:
-                                  <div v-for="tag in tags">
-                                    <input
-                                        :value="tag.id"
-                                        type="checkbox"
-                                        :id="tag.id"
-                                        v-model="tagIds"
-                                      />
-                                      <label :for="tag.id">{{ tag.name }}</label>
+                                <div class="card-body">
+                                  TAGS: 
+                                <div class="col-md-6">
+                                  
+                                  <br>
+                                  <div v-for="tag in tags"> 
+                                    <div class="list-checkbox">
+                                        <div class="checkbox checkbox-primary">
+                                            
+                                              <input
+                                                  :value="tag.id"
+                                                  type="checkbox"
+                                                  :id="tag.id"
+                                                  v-model="tagIds"
+                                                />
+                                              <label :for="tag.id">{{ tag.name }}</label>
+                                            
+                                        </div>
+                                        <br>
+                                    </div>
+
+                                  </div>
                                   </div>
                                 </div><!-- / sub-column -->
                                 <div class="col-md-6 sub-col-left">
@@ -298,8 +314,9 @@
               <p>{{ comment.song_timestamp }}</p>
 
               <div v-if="$parent.getUserId() == comment.user_id">
-                <button v-on:click="showCommentEditForm(comment)">Edit</button>
-                <button v-on:click="deleteComment(comment)">Delete</button>
+
+                <button class="btn btn-secondary m-1" v-on:click="showCommentEditForm(comment)">Edit</button>
+                <button class="btn btn-secondary m-1" v-on:click="deleteComment(comment)">Delete</button>
               </div>
               <br />
 
@@ -462,7 +479,7 @@ export default {
       if (confirm("Are you sure you want to delete this comment?")) {
         axios.delete(`/api/comments/${comment.id}`).then((response) => {
           console.log("Comment deleted.", response.data);
-          // splice comment out of comment array
+          // comment.splice(0,1);
         });
       }
     },

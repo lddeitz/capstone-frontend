@@ -90,29 +90,31 @@
                     required
                   />
                 </div>
-                <small
+                <!-- <small
                   class="text-danger"
                   v-if="passwordConfirmation != password && submit()"
                   >Must match password.</small
-                >
+                > -->
                 <!-- / form-group -->
 
-                <div class="row v-center">
+                <!-- <div class="row v-center"> -->
                   <div class="col-lg-7 tablet-lg-top">
                     <!-- / checkbox -->
                   </div>
                   <!-- / column -->
 
-                  <div class="col-lg-5 text-right">
-                    <button
-                      type="submit"
-                      class="btn btn-md btn-primary tablet-lg-fw"
-                    >
-                      Register
-                    </button>
+                  <div class="col-lg-5">
+                    <center>
+                      <button
+                        type="submit"
+                        class="btn btn-md btn-primary tablet-lg-fw"
+                      >
+                        Register
+                      </button>
+                    </center>
                   </div>
                   <!-- / column -->
-                </div>
+                <!-- </div> -->
                 <!-- / row -->
               </form>
               <!-- / register-form -->

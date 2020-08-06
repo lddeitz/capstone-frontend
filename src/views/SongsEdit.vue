@@ -3,7 +3,7 @@
     <!-- <h2>Edit Your Song</h2> -->
     <div class="container">
       <div class="spacer-2x">&nbsp;</div>
-      <h2 class="section-title text-center mb-10">EDIT</h2>
+      <h2 class="section-title text-center mb-10">EDIT SONG</h2>
       <div class="spacer-line border-primary">&nbsp;</div>
       <div class="spacer-2x">&nbsp;</div>
     </div>
@@ -98,7 +98,6 @@
                       Artwork:
                       <input
                         type="file"
-                        class="form-control"
                         id="artwork"
                         name="inputArtwork"
                         placeholder="Artwork"
@@ -110,7 +109,7 @@
               <!-- </div> -->
               <!-- / form-group -->
               <button type="submit" class="btn btn-primary pill m-1">
-                Update
+                UPDATE
               </button>
             </form>
           <!-- </div> -->
@@ -126,7 +125,7 @@
             class="btn btn-danger-gradient m-10"
             v-on:click="deleteSong()"
           >
-            Delete Song
+            DELETE SONG
           </button>
         </div>
       </center>
@@ -178,20 +177,20 @@ export default {
       axios
         .patch(`/api/songs/${this.song.id}`, formData)
         .then((response) => {
-          this.$router.push(`/users/${response.data.user_id}`);
+          this.$router.push(`/songs/${response.data.id}`);
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
         });
     },
-    // deleteSong: function() {
-    //   if (confirm("Are you sure you want to delete your song?")) {
-    //     axios.delete(`/api/songs/${this.song.id}`).then(response => {
-    //       console.log("Account deleted.", response.data);
-    //       this.$router.push("/signup");
-    //     });
-    //   }
-    // }
+    deleteSong: function() {
+      if (confirm("Are you sure you want to delete your song?")) {
+        axios.delete(`/api/songs/${this.song.id}`).then(response => {
+          console.log("Song deleted.", response.data);
+          this.$router.push(`/users/${response.data.user_id}`);
+        });
+      }
+    }
   },
 };
 </script>

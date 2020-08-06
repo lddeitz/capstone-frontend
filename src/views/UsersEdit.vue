@@ -69,7 +69,6 @@
                     name="inputFirstName"
                     placeholder="First Name"
                     v-model="user.first_name"
-                    required
                   />
                 </div>
               </div>
@@ -95,11 +94,13 @@
                 id="bio"
                 class="form-control"
                 name="inputBio"
-                rows="5"
+                rows="2"
                 placeholder="Bio"
                 v-model="user.bio"
-                required
               ></textarea>
+              <span v-if="user.bio.length > 0">
+                <small>{{ 40 - user.bio.length }} characters remaining</small>
+              </span>
             </div>
             <!-- / form-group -->
             <div class="form-group">
@@ -139,7 +140,7 @@
             </div>
             <!-- / form-group -->
             <button type="submit" class="btn btn-primary pill m-1">
-              Update
+              UPDATE
             </button>
           </form>
         </div>

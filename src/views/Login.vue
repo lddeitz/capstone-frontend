@@ -22,14 +22,14 @@
   </div> -->
 
       <!-- login-form -->
-      <div class="row">
+
+      <center>
         <div class="col-sm-6">
           <p class="lead mt-3 mb-3"></p>
           <div class="card">
             <div class="card-body">
               <form
                 v-on:submit.prevent="submit()"
-                v-on:submit.prevent=
                 class="validation-inner"
                 id="login-form"
               >
@@ -57,33 +57,35 @@
                 </div>
                 <!-- / form-group -->
 
-                <div class="row v-center mt-15">
-                  <div class="col-lg-7 tablet-lg-top">
-                    <div class="checkbox checkbox-primary ml-5">
-                      <label class="hidden"><input type="checkbox"/></label>
-                      <input id="checkbox1" type="checkbox" />
-                      <label for="checkbox1"
-                        ><span class="fw-light">Remember Me</span></label
-                      >
-                    </div>
-                    <!-- / checkbox -->
+                <!-- <div class="row v-center mt-15"> -->
+                <div class="col-lg-7 tablet-lg-top">
+                  <div class="checkbox checkbox-primary ml-5">
+                    <!-- <label class="hidden"><input type="checkbox"/></label> -->
+                    <!-- <input id="checkbox1" type="checkbox" /> -->
+                    <!-- <label for="checkbox1"> -->
+                    <!-- <span class="fw-light">Remember Me</span> -->
+                    <!-- </label> -->
                   </div>
-                  <!-- / column -->
-                  <div class="col-lg-5 text-right">
-                    <button
-                      type="submit"
-                      class="btn btn-md btn-primary tablet-lg-fw"
-                    >
-                      Login
-                    </button>
-                  </div>
-                  <!-- / column -->
+                  <!-- / checkbox -->
                 </div>
+                <!-- / column -->
+                <!-- <div class="col-lg-5 text-right"> -->
+                <center>
+                  <button
+                    type="submit"
+                    class="btn btn-md btn-primary tablet-lg-fw"
+                  >
+                    Login
+                  </button>
+                </center>
+                <!-- </div> -->
+                <!-- / column -->
+                <!-- </div> -->
                 <!-- / row -->
 
                 <!-- <div class="mt-15">
-              <a href="#x" class="forgot-password">Forgot your Password?</a>
-            </div> -->
+                    <a href="#x" class="forgot-password">Forgot your Password?</a>
+                  </div> -->
                 <!-- / mt-15 -->
               </form>
               <!-- / login-form -->
@@ -93,7 +95,7 @@
           <!-- / card -->
         </div>
         <!-- / col-sm-6 -->
-      </div>
+      </center>
     </div>
   </div>
 </template>

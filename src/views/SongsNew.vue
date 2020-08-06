@@ -3,7 +3,7 @@
     <!-- <h2>Submit a Song</h2> -->
     <div class="container">
       <div class="spacer-2x">&nbsp;</div>
-      <h2 class="section-title text-center mb-10">UPLOAD A TRACK</h2>
+      <h2 class="section-title text-center mb-10">UPLOAD A SONG</h2>
       <div class="spacer-line border-primary">&nbsp;</div>
       <div class="spacer-2x">&nbsp;</div>
     </div>
@@ -116,7 +116,7 @@
              <div class="spacer-2x">&nbsp;</div>
             <!-- / form-group -->
             <button type="submit" class="btn btn-primary pill m-1">
-              Upload
+              UPLOAD
             </button>
           </form>
            <div class="spacer">&nbsp;</div>
@@ -157,7 +157,7 @@ export default {
         .post("/api/songs", formData)
         .then((response) => {
           console.log("Success", response.data);
-          this.$router.push(`/songs/${response.data.id}`);
+          this.$router.push(`/users/${response.data.user_id}`);
         })
         .catch((error) => {
           this.errors = error.response.data.errors;

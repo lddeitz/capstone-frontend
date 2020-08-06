@@ -5,12 +5,11 @@
         <div class="height-90 v-center dark">
           <div class="container">
             <div class="w60 m-auto text-center">
-              <h1 class="mb-20">PRIVATE LINKS</h1>
+              <h1 class="mb-20">KEEP FOCUSED.</h1>
               <p class="mb-20">
-                You know who you go to for mixing advice on your demos and WIPs.
-                Keep feedback all in one place as you mix towards your final
-                vision of a song - and keep every step leading up to it as
-                lowkey as you'd like.
+                You know who you go to for advice on your songs before they're
+                finished. Keep their feedback all in one place as you mix
+                towards your end goal and track your progress along the way.
               </p>
               <a href="/signup" class="btn btn-primary pill">
                 <span>CREATE A FREE ACCOUNT</span></a
@@ -29,14 +28,14 @@
           <div class="col-md-4">
             <div class="promo-box text-center mb-0 dark bg-inverse">
               <i
-                class="fas fa-hand-holding-usd fs-36 d-block mb-25 text-success"
+                class="fas far fa-calendar-alt fs-36 d-block mb-25 text-success"
               ></i>
               <h6 class="box-title mb-15 text-hover success-hover">
                 VERSION CONTROL
               </h6>
               <p class="box-description">
                 Create a song and collect feedback, updating your song board
-                with a new private link and notes to keep your progress
+                with embedded private links and notes to keep your progress
                 organized.
               </p>
             </div>
@@ -47,7 +46,7 @@
           <div class="col-md-4">
             <div class="promo-box text-center mb-0 dark bg-inverse">
               <i
-                class="fas fa-shipping-fast promo-icon fs-36 d-block mb-25 text-primary"
+                class="fas fas fa-sliders-h promo-icon fs-36 d-block mb-25 text-primary"
               ></i>
               <h6 class="box-title mb-15 text-hover primary-hover">
                 TARGETED FEEDBACK
